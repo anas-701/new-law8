@@ -1,0 +1,48 @@
+.p-field {
+  @apply mb-8;
+
+  label {
+    @apply text-sm font-medium text-grey500 pb-1.5;
+
+    span {
+      @apply text-textErrorBase;
+    }
+  }
+
+  .input-field {
+
+    @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-14	;
+
+    .p-inputtext {
+      @apply focus:outline-none p-0 border-0 focus:shadow-none w-full;
+    }
+  }
+
+  .ui-message-text {
+    @apply text-textErrorPrimary text-sm;
+
+  }
+  app-formly-radio-button-field{
+    label{
+      @apply text-sm font-medium pb-0 ms-2 text-textConfirmTitle font-sfProDisplay;
+    }
+    @apply flex flex-row-reverse items-center  ;
+    input{
+      @apply scale-150;
+    }
+  }
+  .p-inputotp{
+    &-input{
+      @apply font-Manrope text-2xl font-extrabold size-14 rounded-xl border border-grey200  bg-grey50 focus:border focus:border-primary focus:shadow-none focus:bg-white
+    }
+    .p-filled{
+      @apply bg-blue25 border-0
+    }
+    @apply gap-8 justify-center ;
+  }
+
+}
+.p-password,
+.p-inputtext{
+  @apply  w-full
+}

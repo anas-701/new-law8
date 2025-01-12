@@ -1,0 +1,9 @@
+
+  @for (option of optionsArr||props['optionsArr']; track $index) {
+    <label class="m-0 me-2">{{ option.label }}</label>
+    <p-radioButton
+      [formControl]="formControl"
+      [value]="option.value"
+      [name]="field.name"
+    ></p-radioButton>
+  }

@@ -1,0 +1,31 @@
+<div class="relative" clickOutside (clickOutside)="isOpen = false">
+  <!-- Profile Button -->
+  <button (click)="toggleMenu()" class="relative flex items-center gap-2" type="button">
+    <img src="../../../../../../assets/images/user.png" alt="" class="rounded-full size-10">
+    <p class="text-start leading-3	">
+      <span class="font-sfProDisplay text-textSecondary font-bold text-sm block">Tynisha Obey</span>
+      <span class="text-grey500 font-sfProDisplay text-xs font-medium">Manager</span>
+    </p>
+    
+
+    <i class="icon-arrow-down rounded-md text-lg text-primaryColor"></i>
+  </button>
+  <!-- Dropdown -->
+  <div [@openClose]="isOpen ? 'open' : 'closed'"
+    class="absolute end-0 z-20 mt-2 w-60 origin-top-right transform rounded-2xl bg-white p-3 shadow-lg ring-1 ring-transparent ring-opacity-5 transition focus:outline-none">
+    <ul>
+
+      <li routerLink=""
+        class="inline-flex cursor-pointer font-sfProDisplay items-center gap-4 rounded-md px-4 py-3 text-sm font-medium text-textTertairy transition-all duration-200 hover:bg-bodyBg hover:text-primaryColor">
+        <img src="../../../../../../assets/images/user.png" alt="" class="rounded-full size-8">
+        <span>{{'topBar.editMyProfile'| translate}}</span>
+      </li>
+      <li routerLink=""
+        class="inline-flex cursor-pointer font-sfProDisplay items-center gap-4 rounded-md px-4 py-3 text-sm font-medium text-textErrorBase transition-all duration-200 hover:bg-bodyBg hover:text-primaryColor">
+        <i class="icon-logout text-2xl"></i>
+        <span>{{'topBar.logOut'| translate}}</span>
+      </li>
+    </ul>
+
+  </div>
+</div>

@@ -1,0 +1,29 @@
+{
+  "auth":{
+    "help":"Help",
+    "allInOneApplication":"All In One Application",
+    "authDescription":"Create An Ecommerce Website Backed By Powerful Tools That Help You Find Customers, Drive Sales, And Manage Your Day-To-Day.",
+    "loginToYourAccount":"Login to your account",
+    "username": "Username",
+    "password": "Password",
+    "rememberMe": "Remember Me",
+    "forgetPassword": "Forget Password",
+    "userNamePlaceholder": "Please Enter Your Username",
+    "passwordPlaceholder": "Please Enter Your Password",
+    "enterVerifcationCode": "Enter Verifcation Code",
+    "sendCodeAgain": "Send Code Again",
+    "forgotYourPassword": "Forgot your Password?",
+    "forgetPasswordDescription": "Enter the email address associated with your account and we'll send you a link to reset your password.",
+    "email": "Email",
+    "resetPassword": "Reset Password",
+    "backToLogin": "Back to Login",
+    "emailPlaceholder":"Please Enter Your Email",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "createNewPassword": "Create New Password?",
+    "createNewPasswordDescription": "Please enter a new password. Your new password must be different from previous password.",
+    "yourSuccessfullyChangedYourPassword": "Your password has been changed successfully",
+    "youCanLoginNow": "You can now login",
+    "weHaveJustSentAVerificationCodeTo":"We Have Just Sent A Verification Code To"
+  }
+}

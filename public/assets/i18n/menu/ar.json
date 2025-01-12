@@ -1,0 +1,14 @@
+{
+  "menu": {
+    "dashboard": "الرئيسية",
+    "clients": "العملاء",
+    "matters": "القضايا",
+    "taskManagement": "إدارة المهام",
+    "timesheet": "الجدول الزمني",
+    "users": "المستخدمين",
+    "lookups": "البحث",
+    "reports": "التقارير",
+    "settingsAndManage": "الإعدادات والإدارة",
+    "getHelp": "احصل على مساعدة"
+  }
+}

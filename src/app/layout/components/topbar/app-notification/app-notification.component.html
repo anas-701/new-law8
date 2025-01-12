@@ -1,0 +1,40 @@
+<div class="relative" clickOutside (clickOutside)="isOpen = false">
+    <!-- notification Button -->
+    <button (click)="toggleMenu()" class="p-2 bg-white rounded-full size-10	" type="button">
+        <i class="icon-bell text-2xl text-textSecondary"></i>
+    </button>
+    <!-- Dropdown -->
+    <div [@openClose]="isOpen ? 'open' : 'closed'"
+        class="py-7 absolute end-0 z-20 mt-2 w-[440px] origin-top-right transform rounded-2xl bg-white shadow-lg ring-1 ring-transparent ring-opacity-5 transition focus:outline-none">
+        <div class="flex justify-between mb-2 px-6">
+            <span
+                class="text-2xl text-textConfirmTitle font-sfProDisplay font-bold">{{'topBar.notifications'|translate}}</span>
+            <p class="text-primary text-sm font-semibold font-sfProDisplay cursor-pointer flex items-center"> <i
+                    class="icon-checks text-2xl pe-2"></i><span>{{'topBar.markAllAsRead'|translate}}</span></p>
+        </div>
+        <ul class="max-h-80 overflow-y-auto scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin  scrollbar-track-transparent scrollbar-thumb-muted">
+            @for (item of notifications; track $index) {
+                <li routerLink=""
+                    class="flex justify-between cursor-pointer font-sfProDisplay items-center gap-2 px-6 py-4 transition-all duration-200" [ngClass]="{'bg-greyScale100 border-b':!item.seen}">
+                    <div class="relative">
+                        @if(!item.seen){
+                            <span class="absolute bg-textErrorBase border-white size-2 rounded-full end-0 top-1.5 border"></span>
+                        }
+                        <img src="../../../../../../assets/images/icons/{{item.module}}.svg" alt="" class="size-12">
+                    </div>
+                    <div class="grow">
+                        <h5 class="font-sfProDisplay text-sm font-semibold text-textSecondaryHover mb-1">{{item.title}}</h5>
+                        <p class="font-sfProDisplay text-sm font-medium text-grey500">{{item.description}}</p>
+                    </div>
+                    <div class="place-self-start">
+                        <p class="text-grey400 text-xs font-medium font-sfProDisplay">{{item.date|date}}</p>
+                    </div>
+                </li>
+            }
+        </ul>
+        <div class="text-center py-3 px-4 mt-2 border-t">
+            <p class="text-primary cursor-pointer font-sfProDisplay font-medium text-sm">
+                {{'topBar.seeAllNotifications'|translate}}</p>
+        </div>
+    </div>
+</div>

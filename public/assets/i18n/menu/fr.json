@@ -1,0 +1,14 @@
+{
+    "menu": {
+      "dashboard": "Tableau de bord",
+      "clients": "Clients",
+      "matters": "Affaires",
+      "taskManagement": "Gestion des tâches",	
+      "timesheet": "Feuille de temps",
+      "users": "Utilisateurs",
+      "lookups": "Recherches",
+      "reports": "Rapports",
+      "settingsAndManage": "Paramètres et Gérer",
+      "getHelp": "Obtenir de l'aide"
+    }
+  }

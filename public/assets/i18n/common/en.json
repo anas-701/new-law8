@@ -1,0 +1,36 @@
+{
+  "common": {
+  },
+  "btn": {
+    "signIn": "Sign In",
+    "verify": "Verify"
+  },
+  "messages": {
+    "createdSuccessfully": "Created successfully",
+    "updateSuccessfully": "Update successfully",
+    "deletedSuccessfully": "Deleted successfully",
+    "internalServerError": "Internal Server Error!",
+    "dataMessage": "Total",
+    "dropClick": "Drop files to upload or click",
+    "deletConfirmation": "Are you sure you want to delete?",
+    "noRecordsFound": "No records found",
+    "signInError": "Sign In error",
+    "successfullyLoggedIn": "Successfully logged in"
+  },
+  "validation": {
+    "required": "This field is required!",
+    "url": "URL must be valid!",
+    "email": "Please enter a valid email",
+    "phone": "Please enter a valid phone number",
+    "password": "Password must contain at least one lowercase letter, one uppercase letter, one number, one special character, and be between 8 to 16 characters long",
+    "passwordNotMatching": "Password not matching!",
+    "englishLetters": "This field must contain English letters only!",
+    "arabicLetters": "This field must contain Arabic letters only!",
+    "max":"You have exceeded the maximum limit",
+    "min":"You have exceeded the minimum limit"
+
+  },
+  "status": {
+
+  }
+}

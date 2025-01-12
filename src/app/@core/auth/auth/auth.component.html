@@ -1,0 +1,36 @@
+<div class="grid grid-cols-2 bg-white">
+  <div>
+    <div class="px-16 py-4">
+      <img src="../../../../../assets/images/logo-sm.svg" alt="logo" />
+    </div>
+    <div class="h-[calc(100vh-4.90rem)] flex items-center justify-center">
+      <div class="w-3/5">
+        <router-outlet />
+      </div>
+    </div>
+  </div>
+  <div class="bg-gradient-to-b from-primary to-yaleBlue">
+    <div class="px-16 py-4 flex !justify-end items-center gap-10 ">
+      <span class="text-sm text-white cursor-pointer">{{ "auth.help" | translate }}</span>
+
+      <shared-language />
+    </div>
+    <div class="h-[calc(100vh-5rem)] flex items-center justify-center">
+      <div class="text-center w-3/5">
+        <div class="mb-12">
+          <img
+            src="../../../../../assets/images/auth.svg"
+            alt=""
+            class="w-full"
+          />
+        </div>
+        <h1 class="font-bold text-white text-4xl mb-6">
+          {{ "auth.allInOneApplication" | translate }}
+        </h1>
+        <p class="text-white text-lg font-sfProDisplay">
+          {{ "auth.authDescription" | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

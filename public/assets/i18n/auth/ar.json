@@ -1,0 +1,29 @@
+{
+  "auth":{
+    "help":"مساعدة",
+    "allInOneApplication":"كل شيء في تطبيق واحد",
+    "authDescription":"إنشاء موقع إلكتروني للتجارة الإلكترونية مدعوم بأدوات قوية تساعدك على العثور على العملاء وزيادة المبيعات وإدارة يومك.",
+    "loginToYourAccount":"تسجيل الدخول إلى حسابك",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "rememberMe": "ذكرنى",
+    "forgetPassword": "هل نسيت كلمة السر",
+    "userNamePlaceholder": "من فضلك قم بإدخال اسم المستخدم",
+    "passwordPlaceholder": "من فضلك قم بإدخال كلمة المرور",
+    "enterVerifcationCode": "أدخل رمز التحقق",
+    "sendCodeAgain": "إرسال الرمز مرة أخرى",
+    "forgotYourPassword": "هل نسيت كلمة السر؟",
+    "forgetPasswordDescription": "أدخل عنوان البريد الإلكتروني المرتبط بحسابك وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+    "email": "البريد الإلكتروني",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "backToLogin": "العودة إلى تسجيل الدخول",
+    "emailPlaceholder":"من فضلك قم بإدخال بريدك الإلكتروني",
+    "newPassword": "كلمة السر الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "createNewPassword": "إنشاء كلمة مرور جديدة؟",
+    "createNewPasswordDescription": "الرجاء إدخال كلمة مرور جديدة. يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور السابقة.",
+    "yourSuccessfullyChangedYourPassword": "تم تغيير كلمة المرور بنجاح",
+    "youCanLoginNow": "يمكنك الآن تسجيل الدخول",
+    "weHaveJustSentAVerificationCodeTo":"لقد أرسلنا رمز التحقق إلى"
+  }
+}

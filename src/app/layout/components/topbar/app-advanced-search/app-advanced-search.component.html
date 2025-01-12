@@ -1,0 +1,43 @@
+<div class="relative">
+  <div class="flex">
+    <formly-form [model]="formlyModel" [fields]="formlyFields" [form]="formly" />
+    @if(!isOpen){
+      <app-shared-button [btnType]="'button'" [label]="'topBar.advancedSearch'|translate" [styleClass]="'font-medium text-primary !text-xs !px-4 !py-1.5'"></app-shared-button>
+    }
+  </div>
+
+  <!-- Dropdown -->
+  <div [@openClose]="isOpen ? 'open' : 'closed'"
+    class="absolute start-0 z-20 mt-2 w-[513px] origin-top-right transform rounded-2xl bg-white px-3.5 py-4 shadow-lg ring-1 ring-transparent ring-opacity-5 transition focus:outline-none">
+    <div class="flex justify-between mb-2 py-1">
+      <span class="text-xs text-textSecondary font-sfProDisplay font-bold">{{'topBar.result'|translate}} : </span>
+      <i class="icon-close cursor-pointer text-xl" (click)="isOpen=false"></i>
+    </div>
+    <ul
+      class="flex flex-col gap-1 border-y py-2 border-grey200 max-h-80 overflow-y-auto scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin  scrollbar-track-transparent scrollbar-thumb-muted">
+      @for (item of searchResult; track $index) {
+
+      <li routerLink=""
+        class="flex justify-between cursor-pointer font-sfProDisplay items-center gap-4 rounded-md p-2 text-sm font-medium text-textTertairy transition-all duration-200 hover:bg-grey100 hover:rounded-lg">
+        <div>
+          <p class="mb-1">
+            <span class="font-sfProDisplay font-bold text-sm text-textSecondary pe-2 border-e border-grey400" [innerHTML]="item.code|highlight:searchValue">
+            </span>
+            <span class="font-sfProDisplay font-medium text-xs text-textTertairy ps-2" [innerHTML]="item.name|highlight:searchValue" ></span>
+          </p>
+          <p class="text-textTertairy text-xs font-sfProDisplay" [innerHTML]="item.desc|highlight:searchValue"></p>
+        </div>
+        <div>
+          <span
+            class="py-0.5 px-2 border border-blue200 rounded-full bg-blue50 font-sfProDisplay text-xs text-blue600">{{item.category}}</span>
+        </div>
+      </li>
+      }
+
+
+    </ul>
+    <div class="text-center py-1.5 px-4 mt-2">
+      <p class="text-primary cursor-pointer font-sfProDisplay font-medium text-xs">{{'topBar.tryAdvancedSearch'|translate}}</p>
+    </div>
+  </div>
+</div>

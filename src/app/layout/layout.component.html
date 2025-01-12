@@ -1,0 +1,20 @@
+<div class="flex h-screen w-full overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <div
+    class=" flex grow flex-col content-start overflow-hidden text-lg py-4 px-12"
+  >
+    <!-- Header -->
+    <app-topbar/>
+    <!-- main content -->
+    <div
+      id="main-content"
+      class="grow overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-track-transparent scrollbar-thumb-muted"
+    >
+      <div class="px-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

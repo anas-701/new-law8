@@ -1,0 +1,28 @@
+<div class="mx-auto">
+  <div class="flex items-center justify-between lg:justify-start">
+    <!-- Mobile Navigation Menu Button -->
+    <div class="sm:order-1 lg:hidden">
+      <button
+        class="inline-flex items-center justify-center rounded-md bg-muted p-2 text-muted-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primaryColor hover:bg-muted-foreground hover:text-muted"
+        type="button" aria-expanded="false" (click)="toggleMobileMenu()">
+        <i class="icon-menu text-sm"></i>
+      </button>
+    </div>
+    <div>
+      <app-advanced-search />
+    </div>
+    <!-- Profile menu -->
+    <div class="flex items-center justify-end sm:order-4 lg:w-0 lg:flex-1">
+      <div>
+       <app-notification/>
+      </div>
+      <div class="md:mx-6">
+        <shared-language [showLabel]="false" />
+      </div>
+
+      <app-user></app-user>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <app-navbar-mobile></app-navbar-mobile>
+</div>

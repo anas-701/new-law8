@@ -1,0 +1,28 @@
+@layer base {
+  :root {
+    --primary: #2D61F5;
+    --yale-blue:#155A9A;
+    --border-primary:#D5D7DA;
+    --text-secondary:#414651;
+    --text-error-primary:#D92D20;
+    --text-error-base-500:#F04438;
+    --border-error_subtle:#FDA29B;
+    --blue-25:#F9F9FF;
+    --grey-200:#E9EAEB;
+    --grey-50: #FAFAFA;
+    --text-tertairy:#535862;
+    --text-confirm-title:#111827;
+    --grey-scale-300: #CCDCFF;
+    --divider-color:#EEEFF2;
+    --bg-color:#f6f6f6;
+    --grey-500: #717680;
+    --success-base-500: #17b26a;
+    --blue-200:#B0C0F6;
+    --grey-400:#A4A7AE;
+    --blue-50:#EDF0FD;
+    --blue-600: #1E43D7;
+    --grey-100: #F5F5F5;
+    --text-secondary-hover:#252B37;
+    --greyscale100: #F9FAFB;
+  }
+}

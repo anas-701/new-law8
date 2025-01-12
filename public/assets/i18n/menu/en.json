@@ -1,0 +1,14 @@
+{
+  "menu": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "matters": "Matters",
+    "taskManagement": "Task Management",	
+    "timesheet": "Timesheet",
+    "users": "Users",
+    "lookups": "Lookups",
+    "reports": "Reports",
+    "settingsAndManage": "Settings & Manage",
+    "getHelp": "Get Help"
+  }
+}

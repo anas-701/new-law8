@@ -1,0 +1,10 @@
+<h2 class="font-bold text-3xl mb-10">{{'auth.enterVerifcationCode'|translate}}</h2>
+<form [formGroup]="formly" (ngSubmit)="onSubmit()" class="mb-8">
+  <formly-form [model]="formlyModel" [fields]="formlyFields" [form]="formly"/>
+  <app-shared-button [btnType]="'submit'" [label]="'btn.verify'|translate" [styleClass]="'bg-primary text-white'"/>
+</form>
+@if(counterInSeconds){
+  <p class="px-8 py-3.5 font-bold text-center text-primary font-sfProDisplay text-lg" >{{counterInSeconds|secondsToTime}}</p>
+}
+
+<app-shared-button  [label]="'auth.sendCodeAgain'|translate" [styleClass]="'text-primary disabled:text-greyScale300'" (onClick)="countDown()" [disabled]="isLoading"/>
