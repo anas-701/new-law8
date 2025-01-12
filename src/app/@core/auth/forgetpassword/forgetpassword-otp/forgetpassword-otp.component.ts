@@ -1,5 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { Message } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
 import { finalize, interval, take } from 'rxjs';
 import { API_Config } from 'src/app/@core/api/api-config/api.config';
 import { FormBaseClass } from 'src/app/@core/classes/form-base.class';
@@ -17,6 +19,7 @@ import { SecondsToTimePipe } from 'src/app/@shared/services/secondsToTime/second
     SharedButtonComponent,
     TranslateModule,
     SecondsToTimePipe,
+    MessagesModule
   ],
   providers: [SecondsToTimePipe],
   templateUrl: './forgetpassword-otp.component.html',
@@ -28,6 +31,7 @@ export class ForgetpasswordOtpComponent
 {
   _authService = inject(AuthService);
   counterInSeconds!: number;
+  messages!: Message[];
   ngOnInit(): void {
     this.initForm();
     if (!this._authService.user) this._router.navigate(['/forget-password']);
@@ -75,10 +79,10 @@ export class ForgetpasswordOtpComponent
         next: (res: ApiRes) => {
           if (res?.isSuccess) {
             this._router.navigate(['/forget-password/change-password']);
-          } else {
-            this._toastrNotifiService.displayError(
-              this._languageService.getTransValue('messages.userIdOrEmailWrong')
-            );
+          } else{
+            this.messages=[
+              { severity: 'error', detail: res.message,icon:'icon-error-circle' },
+            ]
           }
         },
         error: (err) => {

@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { Message } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
 import { finalize } from 'rxjs';
 import { API_Config } from 'src/app/@core/api/api-config/api.config';
 import { FormBaseClass } from 'src/app/@core/classes/form-base.class';
@@ -18,6 +20,7 @@ import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly
     SharedButtonComponent,
     TranslateModule,
     RouterModule,
+    MessagesModule
   ],
   templateUrl: './forgetpassword-change-password.component.html',
   styleUrl: './forgetpassword-change-password.component.scss',
@@ -27,6 +30,7 @@ export class ForgetpasswordChangePasswordComponent
   implements OnInit
 {
   _authService = inject(AuthService);
+  messages!: Message[];
   ngOnInit() {
     this.initForm();
   }
@@ -105,6 +109,10 @@ export class ForgetpasswordChangePasswordComponent
                   }
                 },
               });
+          }else{
+            this.messages=[
+              { severity: 'error', detail: res.message,icon:'icon-error-circle' },
+            ]
           }
         },
       });
