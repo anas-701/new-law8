@@ -27,8 +27,7 @@ import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly
 })
 export class ForgetpasswordChangePasswordComponent
   extends FormBaseClass
-  implements OnInit
-{
+  implements OnInit {
   _authService = inject(AuthService);
   messages!: Message[];
   ngOnInit() {
@@ -38,33 +37,38 @@ export class ForgetpasswordChangePasswordComponent
   initForm() {
     this.formlyFields = [
       {
-        key: 'newPassword',
-        type: 'password',
-        props: {
-          label: this._languageService.getTransValue('auth.password'),
-          required: true,
-        },
-      },
-      {
-        key: 'confirmPassword',
-        type: 'password',
-        props: {
-          label: this._languageService.getTransValue('auth.confirmPassword'),
-          required: true,
-        },
-        validators: {
-          fieldMatch: {
-            expression: (control: any) =>
-              control.value === this.formlyModel.newPassword,
-            message: this._languageService.getTransValue(
-              'validation.passwordNotMatching'
-            ),
+        fieldGroupClassName: 'flex flex-col gap-8',
+        fieldGroup: [
+          {
+            key: 'newPassword',
+            type: 'password',
+            props: {
+              label: this._languageService.getTransValue('auth.password'),
+              required: true,
+            },
           },
-        },
-        expressionProperties: {
-          'props.disabled': (model) => !this.formly.get('newPassword')?.valid,
-        },
-      },
+          {
+            key: 'confirmPassword',
+            type: 'password',
+            props: {
+              label: this._languageService.getTransValue('auth.confirmPassword'),
+              required: true,
+            },
+            validators: {
+              fieldMatch: {
+                expression: (control: any) =>
+                  control.value === this.formlyModel.newPassword,
+                message: this._languageService.getTransValue(
+                  'validation.passwordNotMatching'
+                ),
+              },
+            },
+            expressionProperties: {
+              'props.disabled': (model) => !this.formly.get('newPassword')?.valid,
+            },
+          },
+        ]
+      }
     ];
   }
 
@@ -109,9 +113,9 @@ export class ForgetpasswordChangePasswordComponent
                   }
                 },
               });
-          }else{
-            this.messages=[
-              { severity: 'error', detail: res.message,icon:'icon-error-circle' },
+          } else {
+            this.messages = [
+              { severity: 'error', detail: res.message, icon: 'icon-error-circle' },
             ]
           }
         },

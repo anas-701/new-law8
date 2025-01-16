@@ -1,15 +1,4 @@
 import { MenuItem } from "./menu.model";
-
-// "dashboard": "Tableau de bord",
-// "clients": "Clients",
-// "matters": "Affaires",
-// "taskManagement": "Gestion des tâches",	
-// "timesheet": "Feuille de temps",
-// "users": "Utilisateurs",
-// "lookups": "Recherches",
-// "reports": "Rapports",
-// "settingsAndManage": "Paramètres et Gérer",
-// "getHelp": "Obtenir de l'aide"
 export class Menu {
   public static pages: MenuItem[] = [
     {
@@ -24,6 +13,16 @@ export class Menu {
           icon: 'icon-clients',
           label: 'menu.clients',
           route: '/clients',
+          children: [
+            {
+              label: 'menu.clients',
+              route: '/clients'
+            },
+            {
+              label: 'menu.matterTypes',
+              route: '/matter-types'
+            }
+          ]
         },
         {
           icon: 'icon-matters',

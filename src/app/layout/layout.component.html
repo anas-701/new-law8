@@ -3,18 +3,18 @@
   <app-sidebar></app-sidebar>
 
   <div
-    class=" flex grow flex-col content-start overflow-hidden text-lg py-4 px-12"
+    class=" flex grow flex-col content-start overflow-hidden text-lg py-4 "
   >
     <!-- Header -->
-    <app-topbar/>
+    <div class="mb-10 px-12">
+      <app-topbar/>
+    </div>
     <!-- main content -->
     <div
       id="main-content"
-      class="grow overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-track-transparent scrollbar-thumb-muted"
+      class="grow px-12 overflow-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-track-rounded scrollbar-track-transparent scrollbar-thumb-muted"
     >
-      <div class="px-12">
-        <router-outlet></router-outlet>
-      </div>
+    <router-outlet></router-outlet>
     </div>
   </div>
 </div>

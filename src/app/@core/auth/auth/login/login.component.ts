@@ -39,47 +39,52 @@ export class LoginComponent extends FormBaseClass implements OnInit {
   initForm(): void {
     this.formlyFields = [
       {
-        key: 'userName',
-        type: 'input',
-        props: {
-          label: 'auth.username',
-          placeholder: 'auth.userNamePlaceholder',
-          required: true,
-        },
-      },
-      {
-        key: 'password',
-        type: 'input',
-        props: {
-          type: 'password',
-          label: 'auth.password',
-          placeholder: 'auth.passwordPlaceholder',
-          required: true,
-          feedback: false,
-        },
-      },
-      {
-        fieldGroupClassName: 'flex justify-end align-items-center mb-8',
-        fieldGroup: [
-          // {
-          //   key: "RememberMe",
-          //   type: "radio",
-          //   props: {
-          //     options:[{label:this._languageService.getTransValue("auth.rememberMe"),value:true}],
-          //   }
-          // },
+        fieldGroupClassName:'flex flex-col gap-8',
+        fieldGroup:[
           {
-            type: 'button',
+            key: 'userName',
+            type: 'input',
             props: {
-              label: 'auth.forgetPassword',
-              class: 'text-primary text-sm !p-0',
-              onClick: () => {
-                this._router.navigate(['/forget-password']);
-              },
+              label: 'auth.username',
+              placeholder: 'auth.userNamePlaceholder',
+              required: true,
             },
           },
-        ],
-      },
+          {
+            key: 'password',
+            type: 'input',
+            props: {
+              type: 'password',
+              label: 'auth.password',
+              placeholder: 'auth.passwordPlaceholder',
+              required: true,
+              feedback: false,
+            },
+          },
+          {
+            fieldGroupClassName: 'flex justify-end align-items-center mb-8',
+            fieldGroup: [
+              // {
+              //   key: "RememberMe",
+              //   type: "radio",
+              //   props: {
+              //     options:[{label:this._languageService.getTransValue("auth.rememberMe"),value:true}],
+              //   }
+              // },
+              {
+                type: 'button',
+                props: {
+                  label: 'auth.forgetPassword',
+                  class: 'text-primary text-sm !p-0',
+                  onClick: () => {
+                    this._router.navigate(['/forget-password']);
+                  },
+                },
+              },
+            ],
+          },
+        ]
+      }
     ];
   }
 

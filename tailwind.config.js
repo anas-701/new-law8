@@ -88,7 +88,7 @@ module.exports = {
         blue50:'var(--blue-50)',
         blue600:'var(--blue-600)',
         textSecondaryHover:'var(--text-secondary-hover)',
-        
+        colorsTextTextPrimary:'var(--colors-text-text-primary-900)',
       },
       screens: {
         xs: "344px",

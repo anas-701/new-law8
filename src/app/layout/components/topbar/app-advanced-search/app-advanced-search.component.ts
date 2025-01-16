@@ -65,7 +65,7 @@ export class AppAdvancedSearchComponent implements OnInit {
       {
         type: 'input',
         key: 'search',
-        className: 'relative text-grey400 border-grey200',
+        className: 'relative text-grey400 border-grey200 search-input',
         props: {
           class: 'transition-all duration-200 ease-in-out z-20 ',
           placeholder: 'topBar.search',

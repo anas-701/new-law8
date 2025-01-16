@@ -1,4 +1,4 @@
-::ng-deep {
+:host ::ng-deep {
     .p-field {
         @apply mb-0 h-9 bg-white rounded-lg;
 
@@ -6,9 +6,10 @@
             @apply h-9
         }
     }
-
-    input {
-        @apply focus:w-[434px] #{!important}
+    .search-input{ 
+        input {
+            @apply focus:w-[434px] #{!important}
+        }
     }
 
 }

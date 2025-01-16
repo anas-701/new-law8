@@ -1,0 +1,9 @@
+<form [formGroup]="formly" (ngSubmit)="onSubmit()">
+<app-clients-editor-main-info [formly]="formly" [formlyFields]="getFields('mainInfo')" [formlyModel]="formlyModel" [options]="formlyOptions" />
+<app-clients-editor-address [formly]="formly" [formlyFields]="getFields('address')" [formlyModel]="formlyModel" [options]="formlyOptions" />
+<app-clients-editor-contact [formly]="formly" [formlyFields]="getFields('contact')" [formlyModel]="formlyModel" [options]="formlyOptions" />
+<!-- <app-shared-button [label]="'Save'|translate"
+    [styleClass]="'bg-primary text-white font-sfProDisplay !text-sm !py-1 !font-medium !leading-8'" />
+<app-shared-button [label]="'Cancel'|translate"
+    [styleClass]="'border border-grey500 text-grey500 font-sfProDisplay !text-sm !py-1 !font-medium !leading-8 hover:border-primary hover:text-primary'" /> -->
+</form>

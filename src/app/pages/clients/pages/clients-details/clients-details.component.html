@@ -1,0 +1,16 @@
+<div class="flex justify-between p-2 rounded-t-lg h-14">
+    <h1 class="font-sfProDisplay font-bold text-2xl text-colorsTextTextPrimary leading-9">
+        {{'Clients'|translate}}</h1>
+    <div class="flex gap-2">
+        <app-shared-button [label]="'Deactivate'|translate"
+            [styleClass]="'border border-grey500 text-grey500 font-sfProDisplay !text-sm !py-1 !font-medium !leading-8 hover:border-primary hover:text-primary'" />
+        <app-shared-button [label]="'Edit'|translate"
+            [styleClass]="'bg-primary text-white font-sfProDisplay !text-sm !py-1 !font-medium !leading-8'" />
+    </div>
+
+</div>
+<div class="my-4">
+    <p-tabMenu [model]="items" />
+</div>
+
+<router-outlet />

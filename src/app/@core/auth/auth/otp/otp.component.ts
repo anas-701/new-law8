@@ -41,18 +41,23 @@ export class OtpComponent extends FormBaseClass implements OnInit {
   override initForm(): void {
     this.formlyFields = [
       {
-        key: "otp",
-        type: "otp",
-        props: {
-          required: true,
-          length: 5
-        }
-      },
-      {
-        key: 'userName',
-        defaultValue: this._authService.user?.userName,
-      },
-    ]
+        fieldGroupClassName: 'flex flex-col gap-8',
+        fieldGroup: [
+          {
+            key: "otp",
+            type: "otp",
+            props: {
+              required: true,
+              length: 5
+            }
+          },
+          {
+            key: 'userName',
+            defaultValue: this._authService.user?.userName,
+          },
+        ]
+      }
+    ];
   }
   onSubmit() {
     if (this.formly.invalid) return;
@@ -80,9 +85,9 @@ export class OtpComponent extends FormBaseClass implements OnInit {
             //   window.location.reload()
             // }, 500);
 
-          } else{
-            this.messages=[
-              { severity: 'error', detail: res.message,icon:'icon-error-circle' },
+          } else {
+            this.messages = [
+              { severity: 'error', detail: res.message, icon: 'icon-error-circle' },
             ]
           }
         },

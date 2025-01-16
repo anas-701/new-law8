@@ -1,5 +1,5 @@
 .p-field {
-  @apply mb-8;
+  // @apply mb-8;
 
   label {
     @apply text-sm font-medium text-grey500 pb-1.5;
@@ -39,6 +39,9 @@
       @apply bg-blue25 border-0
     }
     @apply gap-8 justify-center ;
+  }
+  .p-dropdown{
+    @apply w-full;
   }
 
 }
