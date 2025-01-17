@@ -1,13 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FormlyConfigModule } from '../../modules/formly-config/formly-config.module';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shared-search',
-  standalone: true,
+  standalone: true, 
   imports: [
-    FormlyConfigModule,
-    ReactiveFormsModule
+    FormlyConfigModule  
   ],
   templateUrl: './shared-search.component.html',
   styleUrl: './shared-search.component.scss'
@@ -15,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class SharedSearchComponent implements OnInit {
   formlyModel: any;
   formlyFields: any[] = [];
-  formly: any;
+  formly: FormGroup=new FormGroup({});
   searchValue: string = '';
   @Output() searchValueChange: EventEmitter<string> = new EventEmitter<string>();
   ngOnInit(): void {

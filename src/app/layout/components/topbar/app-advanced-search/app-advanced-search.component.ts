@@ -54,7 +54,7 @@ export class AppAdvancedSearchComponent implements OnInit {
     }
   ]
   searchValue!: string;
-  formly!: FormGroup;
+  formly: FormGroup=new FormGroup({});
   formlyFields: FormlyFieldConfig[] = []
   formlyModel: any;
   ngOnInit(): void {
