@@ -11,7 +11,7 @@
 
   .input-field {
 
-    @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-14	;
+    @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-11	;
 
     .p-inputtext {
       @apply focus:outline-none p-0 border-0 focus:shadow-none w-full;
@@ -40,8 +40,11 @@
     }
     @apply gap-8 justify-center ;
   }
-  .p-dropdown{
-    @apply w-full;
+  .p-dropdown,.p-multiselect{
+    &-label{
+      @apply py-2.5 px-3.5;
+    }
+    @apply w-full h-11 ;
   }
 
 }

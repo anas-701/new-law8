@@ -1,12 +1,12 @@
-import { Component, effect, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
-import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
 import { FormBaseClass } from 'src/app/@core/classes/form-base.class';
 import { ClientsEditorAddressComponent } from './pages/clients-editor-address/clients-editor-address.component';
 import { ClientsEditorContactComponent } from './pages/clients-editor-contact/clients-editor-contact.component';
 import { ClientsEditorMainInfoComponent } from './pages/clients-editor-main-info/clients-editor-main-info.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToggleFormService } from 'src/app/@shared/modules/formly-config/services/toggle-form.service';
 
 @Component({
   selector: 'app-clients-editor',
@@ -17,16 +17,24 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClientsEditorAddressComponent,
     ClientsEditorMainInfoComponent,
     ClientsEditorContactComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    
   ],
   templateUrl: './clients-editor.component.html',
   styleUrl: './clients-editor.component.scss'
 })
 export class ClientsEditorComponent extends FormBaseClass implements OnInit {
-
+  _toggleFormService = inject(ToggleFormService); 
+  toggleEditEffect = effect(() => {
+    
+    if(!this._router.url.includes('add')){
+      this.formlyOptions.formState.readonly = this._toggleFormService.getToggleEdit();
+    }
+  })
   ngOnInit(): void {
     this.initForm();
-   
+
   }
 
   initForm() {
@@ -36,13 +44,28 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
         fieldGroupClassName: 'grid grid-cols-6 gap-4',
         fieldGroup: [
           {
+            key: 'clientImage',
+            type: 'upload-image',
+            className: 'col-span-6',
+            props: {
+              label: 'Client Image',
+              hint: 'Recommended Size 400*400 ',
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
+          },
+          {
             key: 'clientCode',
             type: 'input',
             className: 'md:col-span-2',
             props: {
               label: 'Client Code',
               disabled: true
-            }
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'clientName',
@@ -50,7 +73,11 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
             className: 'md:col-span-2',
             props: {
               label: 'Client Name',
-            }
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'foreignName',
@@ -58,16 +85,23 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
             className: 'md:col-span-2',
             props: {
               label: 'Foreign Name',
-            }
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'clientGroup',
-            type: 'select',
+            type: 'multi-select',
             className: 'md:col-span-2',
             props: {
               label: 'Client Group',
-              options: ['Group 1', 'Group 2', 'Group 3'].map(item => ({ label: item, value: item }))
-            }
+              optionsArr: ['Group 1', 'Group 2', 'Group 3', 'Group 4'].map(item => ({ label: item, value: item }))
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'introducingLawyer',
@@ -75,8 +109,12 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
             className: 'md:col-span-2',
             props: {
               label: 'Introducing Lawyer',
-              options: ['Lawyer 1', 'Lawyer 2', 'Lawyer 3'].map(item => ({ label: item, value: item }))
-            }
+              optionsArr: ['Lawyer 1', 'Lawyer 2', 'Lawyer 3'].map(item => ({ label: item, value: item })),
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
         ]
       },
@@ -89,16 +127,24 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'Address 1'
-            }
+              label: 'Address 1',
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'address2',
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'Address 2'
-            }
+              label: 'Address 2',
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'country',
@@ -106,32 +152,48 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
             className: 'md:col-span-2',
             props: {
               label: 'Country',
-              options: ['Country 1', 'Country 2', 'Country 3'].map(item => ({ label: item, value: item }))
-            }
+              optionsArr: ['Country 1', 'Country 2', 'Country 3'].map(item => ({ label: item, value: item })),
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'zipCode',
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'Zip Code'
-            }
+              label: 'Zip Code',
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'city',
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'City'
-            }
+              label: 'City',
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'state',
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'State'
-            }
+              label: 'State',
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           }
         ]
       },
@@ -141,41 +203,57 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
         fieldGroup: [
           {
             key: 'phone1',
-            type: 'input',
+            // type: 'phone',
+            type:'input',
             className: 'md:col-span-2',
             props: {
               label: 'Phone 1'
-            }
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'mobile1',
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'Mobile 1'
-            }
+              label: 'Mobile 1',
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
           },
           {
             key: 'email',
             type: 'input',
             className: 'md:col-span-2',
             props: {
-              label: 'Email'
-            }
-          }
+              label: 'Email',
+
+            },
+            expressions: {
+              'props.readonly': 'formState.readonly',
+            },
+          },
+
         ],
-        expressions: {
-          'props.readonly': 'formState.readonly',
-        },
+
       },
 
     ]
+    if(!this._router.url.includes('add')){
+      this.setFormData()
+    }
+
+  }
+  setFormData(){
     this.formlyModel = {
       mainInfo: {
         clientCode: 'C12345',
         clientName: 'John Doe',
         foreignName: 'جون دو',
-        clientGroup: 'Group 1',
+        clientGroup: ['Group 1', 'Group 2'],
         introducingLawyer: 'Lawyer 2'
       },
       address: {
@@ -187,12 +265,11 @@ export class ClientsEditorComponent extends FormBaseClass implements OnInit {
         state: 'NY'
       },
       contact: {
-        phone1: '555-1234',
-        mobile1: '555-5678',
+        phone1: '+9715555678',
+        mobile1: '+9715555678',
         email: 'johndoe@example.com'
       }
     };
-
   }
   getFields(keyName: string) {
     return this.formlyFields.filter(fields => fields.key == keyName)

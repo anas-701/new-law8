@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
 
 @Component({
@@ -11,7 +12,7 @@ import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly
   styleUrl: './clients-editor-address.component.scss'
 })
 export class ClientsEditorAddressComponent {
-  @Input() formly: any;
+  @Input() formly: FormGroup=new FormGroup({});
   @Input() formlyFields: any;
   @Input() formlyModel: any;
   @Input() options:any;

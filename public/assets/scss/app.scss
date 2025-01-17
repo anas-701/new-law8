@@ -35,7 +35,7 @@
 @import "ngx-toastr/toastr";
 @import '../../../node_modules/quill/dist/quill.core';
 @import '../../../node_modules/quill/dist/quill.snow';
-
+@import '../../../node_modules/intl-tel-input/build/css/intlTelInput';
 @import '../icons/style';
 
 @layer tailwind-base, primeng, tailwind-utilities;

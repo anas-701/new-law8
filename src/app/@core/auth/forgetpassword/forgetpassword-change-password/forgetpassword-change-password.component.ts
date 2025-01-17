@@ -99,8 +99,16 @@ export class ForgetpasswordChangePasswordComponent
                   message: this._languageService.getTransValue(
                     'auth.youCanLoginNow'
                   ),
-                  btnText:
-                    this._languageService.getTransValue('auth.backToLogin'),
+                  btns: [
+                    {
+                      label:
+                        this._languageService.getTransValue('auth.backToLogin'),
+                      styleClass: 'bg-primary text-white',
+                      command: () => {
+                        this._router.navigate(['/auth/login']);
+                      },
+                    },
+                  ],
                 },
               }
             );

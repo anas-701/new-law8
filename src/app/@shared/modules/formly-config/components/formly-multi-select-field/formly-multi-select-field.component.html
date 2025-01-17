@@ -1,0 +1,22 @@
+
+
+  @if(props['readonly']){
+    <p class="text-textSecondary text-sm font-bold font-sfProDisplay mt-3">{{formControl.value}}</p>
+  }@else {
+    <div class="p-fluid">
+        <p-multiSelect
+          [class]="props['class']"
+          [formlyAttributes]="field"
+          [formControl]="formControl"
+          [showClear]="props['showClear'] || true"
+          [options]="props['optionsArr']"
+          [showClear]="props['showClear'] || true"
+          [filter]="props['showFilter'] ?? true"
+          [placeholder]="props['placeholder']"
+          [optionLabel]="props['optionLabel'] || 'label'"
+          [optionValue]="props['optionValue'] || 'value'"
+          (onChange)="change($event)"
+          appendTo="body"
+        />
+      </div>
+  }

@@ -22,12 +22,22 @@ import { SharedButtonComponent } from '../../components/shared-button/shared-but
 import { FormlyOtpFieldComponent } from './components/formly-otp-field/formly-otp-field.component';
 import { FormlyPasswordFieldComponent } from './components/formly-password-field/formly-password-field.component';
 import { PasswordModule } from 'primeng/password';
+import { FormlySelectFieldComponent } from './components/formly-select-field/formly-select-field.component';
+import { FormlyMultiSelectFieldComponent } from './components/formly-multi-select-field/formly-multi-select-field.component';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { FormlyPhoneFieldComponent } from './components/formly-phone-field/formly-phone-field.component';
+import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
+import { FormlyUploadImageFieldComponent } from './components/formly-upload-image-field/formly-upload-image-field.component';
 
 @NgModule({
   declarations: [
     FormlyInputFieldComponent,
     FormlyButtonFieldComponent,
-    FormlyPasswordFieldComponent
+    FormlyPasswordFieldComponent,
+    FormlySelectFieldComponent,
+    FormlyMultiSelectFieldComponent,
+    FormlyPhoneFieldComponent,
+    FormlyUploadImageFieldComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +56,10 @@ import { PasswordModule } from 'primeng/password';
         { name: 'radio', component: FormlyRadioButtonFieldComponent },
         { name: 'otp', component: FormlyOtpFieldComponent, extends: 'input' },
         { name: 'password', component: FormlyPasswordFieldComponent, extends: 'input' },
+        { name: 'select', component: FormlySelectFieldComponent },
+        { name: 'phone', component: FormlyPhoneFieldComponent, extends: 'input' },
+        { name: 'multi-select', component: FormlyMultiSelectFieldComponent, extends: 'input' },
+        { name: 'upload-image', component: FormlyUploadImageFieldComponent, extends: 'input' },
       ]
     }),
     FormlyPrimeNGModule,
@@ -56,7 +70,9 @@ import { PasswordModule } from 'primeng/password';
     SharedButtonComponent,
     FormlyOtpFieldComponent,
     TranslateModule,
-    PasswordModule
+    PasswordModule,
+    MultiSelectModule,
+    NgxIntlTelInputModule,
   ],
   exports: [
     ReactiveFormsModule,

@@ -1,4 +1,8 @@
-<div class="input-field w-full flex items-center"
+
+@if(props['readonly']){
+<p class="text-textSecondary text-sm font-bold font-sfProDisplay mt-3">{{formControl.value}}</p>
+}@else {
+  <div class="input-field w-full flex items-center"
   [ngClass]="{'!border-borderErrorSubtle': formControl.invalid && formControl.touched}">
   @if(props['icon']){
   <i [ngClass]="props['icon']" class="pe-3"></i>
@@ -13,6 +17,5 @@
   <i [ngClass]="showPassword ? 'icon-show' : 'icon-hide'" class="cursor-pointer" (click)="togglePassword()">
   </i>
   }
-
-  <!-- <i class="icon-close text-xl text-borderPrimary cursor-pointer" (click)="formControl.reset()" [ngClass]="{'invisible':!(props['withClear'] && formControl.value)}"></i> -->
 </div>
+}

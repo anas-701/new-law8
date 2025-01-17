@@ -1,0 +1,15 @@
+
+@if(props.readonly){
+    <div>
+        <img [src]="uploadedImage||'assets/images/user-avatar.svg'" alt="" class="size-32 rounded-full object-cover">
+    </div>
+
+}@else{
+    <small class="text-xs text-grey400 font-sfProDisplay">{{props['hint']}} </small>
+    <div>
+        <img [src]="uploadedImage||'assets/images/user-avatar.svg'" alt="" (click)="fileInput.click()" class="size-32 rounded-full object-cover">
+    </div>
+
+    <input type="file" (change)="onFileChange($event)" style="display: none;" #fileInput>
+}
+

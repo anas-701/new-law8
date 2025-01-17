@@ -19,10 +19,14 @@ export class Menu {
               route: '/clients'
             },
             {
-              label: 'menu.matterTypes',
-              route: '/matter-types'
+              label: 'Add new client',
+              route: '/clients/add'
+            },
+            {
+              label: 'In Active Clients',
+              route: '/clients/inactive'
             }
-          ]
+          ] 
         },
         {
           icon: 'icon-matters',

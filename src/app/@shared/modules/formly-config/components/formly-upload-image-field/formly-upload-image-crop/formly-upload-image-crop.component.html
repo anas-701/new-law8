@@ -1,0 +1,17 @@
+<image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [maintainAspectRatio]="false"
+    [containWithinAspectRatio]="true"
+    [roundCropper]="true"
+    format="png"
+    [output]="'base64'"
+    (imageCropped)="imageCropped($event)"
+></image-cropper>
+
+<div class="text-end">
+    <app-shared-button
+    styleClass="bg-primary text-white"
+    [label]=" 'btn.save' | translate"
+    (onClick)="dynamicDialogRef.close(croppedBase64)"/>
+</div>
