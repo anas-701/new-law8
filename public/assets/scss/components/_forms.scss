@@ -17,6 +17,9 @@
       @apply focus:outline-none p-0 border-0 focus:shadow-none w-full;
     }
   }
+  .iti input.iti__tel-input{
+    @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-11	;
+  }
 
   .ui-message-text {
     @apply text-textErrorPrimary text-sm;
