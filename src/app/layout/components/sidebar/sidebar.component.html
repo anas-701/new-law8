@@ -140,7 +140,7 @@
        <ul class="menu overflow-auto overflow-x-hidden  transition-all duration-300 scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thin  scrollbar-track-transparent scrollbar-thumb-muted " [ngClass]="{'h-[520px]':$index==0}">
           @for (item of menu.items; track $index) {
           <li class="group px-6 text-textTertairy py-1 cursor-pointer mb-1 border-s-[3px] border-s-transparent hover:text-primary hover:bg-blue25  hover:border-primary
-        } transition-all duration-200" routerLinkActive="active" [ngClass]="{
+        } transition-all duration-200" routerLinkActive="active font-bold"  [ngClass]="{
             '!text-primary !bg-blue25 !border-primary': isActive(item.route) && !item.children?.length,
                            }" >
              <div class="flex justify-between py-2" (click)="toggleMenu(item)">
@@ -166,8 +166,8 @@
                    'max-h-screen': item.expanded
                  }">
                    @for (item of item.children; track $index) {
-                      <li class="pe-5 py-2 relative before:border-b  before:absolute before:w-[25px] before:h-[110%] before:border-s before:rounded-bl before:-top-[23px] before:-start-[30px] before:border-borderPrimary before:first-of-type:h-2/3 before:first-of-type:-top-[6px]  group-hover:before:border-blue200">
-                         <a [routerLink]="item.route" class="font-sfProDisplay text-sm font-medium text-[11px]">{{item.label|translate}}</a>
+                      <li class="pe-5 py-2 relative before:border-b  before:absolute before:w-[25px] before:h-[110%] before:border-s before:rounded-bl before:-top-[23px] before:-start-[30px] before:border-borderPrimary before:first-of-type:h-2/3 before:first-of-type:-top-[6px]  group-hover:before:border-blue200" [ngClass]="{'!before:border-blue200':isActive(item.route)}">
+                         <a [routerLink]="item.route"  class="font-sfProDisplay text-sm font-normal text-[11px]" [ngClass]="{'!font-medium':isActive(item.route)}">{{item.label|translate}}</a>
                       </li>
                    }
                 </ul>

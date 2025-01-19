@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   inject,
   OnInit,
 } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
-import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { SubMenuItem } from './menu.model';
 import { LanguageService } from '@core/services/language.service';
 import { filter } from 'rxjs';
@@ -17,7 +16,7 @@ import { SharedModule } from '@shared/shared.module';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, SharedModule]
+  imports: [ RouterModule, SharedModule]
 })
 
 export class SidebarComponent implements OnInit{
@@ -53,6 +52,11 @@ export class SidebarComponent implements OnInit{
   }
 
   isActive(route: string): boolean {
-    return this.currentUrl.includes(route);
+    // if(route==='/clients'){
+    //   console.log('route '+route,this.currentUrl.includes(route));
+    //   console.log('route1 '+route,this.currentUrl===route);
+    //   return true
+    // }
+    return this.currentUrl===route;
   }
 }

@@ -6,7 +6,7 @@ export class Menu {
         {
           icon: 'icon-home',
           label: 'menu.dashboard',
-          route: '/',
+          route: '/dashboard',
 
         },
         {

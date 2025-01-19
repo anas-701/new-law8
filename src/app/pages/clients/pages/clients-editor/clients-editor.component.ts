@@ -1,7 +1,6 @@
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
-import { FormBaseClass } from 'src/app/@core/classes/form-base.class';
 import { ClientsEditorAddressComponent } from './pages/clients-editor-address/clients-editor-address.component';
 import { ClientsEditorContactComponent } from './pages/clients-editor-contact/clients-editor-contact.component';
 import { ClientsEditorMainInfoComponent } from './pages/clients-editor-main-info/clients-editor-main-info.component';

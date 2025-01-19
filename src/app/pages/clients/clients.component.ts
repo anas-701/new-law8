@@ -27,7 +27,10 @@ export class ClientsComponent implements OnInit   {
   url:string='';
   ngOnInit(): void {
     this.url=this._router.url.includes('inactive')?'/clients/inactive/view':'/clients/view';
-    this.redirectToFirstClientInList()
+    if (!this._router.url.includes('add')) {
+      this.redirectToFirstClientInList()
+    }
+   
   }
 
   searchValueChange(value: string): void {

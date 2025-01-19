@@ -3,6 +3,7 @@
 @if(props['readonly']){
   <p class="text-textSecondary text-sm font-bold font-sfProDisplay mt-3">{{formControl.value}}</p>
 }@else {
+  <div class="p-field">
     <ngx-intl-tel-input
     [preferredCountries]="[CountryISO.UnitedArabEmirates]"
     [enableAutoCountrySelect]="false"
@@ -18,6 +19,7 @@
     [formControl]="formControl"
     [formlyAttributes]="field"
   ></ngx-intl-tel-input>
+  </div>
   @if (formControl.value && !formControl.valid && formControl.touched) {
     <small
       class="p-error ng-star-inserted"
