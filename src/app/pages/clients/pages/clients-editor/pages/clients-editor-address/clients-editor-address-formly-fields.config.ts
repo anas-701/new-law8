@@ -1,4 +1,7 @@
-export function clientsEditorAddressFormlyFieldsConfig(){
+import { FormlyFieldConfig } from "@ngx-formly/core";
+import { ClientsEditorAddressComponent } from "./clients-editor-address.component";
+
+export function clientsEditorAddressFormlyFieldsConfig(THIS: ClientsEditorAddressComponent): FormlyFieldConfig[] {  
   return [
     {
         fieldGroupClassName: 'grid grid-cols-6 gap-4',

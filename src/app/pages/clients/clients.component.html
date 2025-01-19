@@ -19,8 +19,7 @@
         </div>
         <div class="flex flex-col gap-2">
             @for(client of data; track client.id){
-            <a href="javascript:void(0)" [routerLink]="[url, client.id]"
-                [routerLinkActive]="'active'"
+            <a href="javascript:void(0)" [routerLink]="[url, client.id]" [routerLinkActive]="'active'"
                 class="flex justify-between py-4 ps-4 pe-2 rounded-lg border-2 border-white cursor-pointer hover:bg-white relative before:h-0 before:w-0 before:bg-primary before:rounded-full before:absolute before:top-2.5 before:-start-1.5 before:transition-all before:duration-300 before:ease-in-out hover:before:h-4/6 hover:before:w-1">
                 <div class="flex justify-between gap-2">
                     <img src="assets/images/user-avatar.svg" alt="client" class="size-10 rounded-full">
@@ -41,7 +40,7 @@
             }
 
             <p-paginator [dir]="'ltr'" (onPageChange)="onPageChange($event)" [first]="0" [rows]="5" pageLinkSize="2"
-                [totalRecords]="data.length" [showCurrentPageReport]="true"
+                [totalRecords]="totalCount" [showCurrentPageReport]="true"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" />
 
         </div>

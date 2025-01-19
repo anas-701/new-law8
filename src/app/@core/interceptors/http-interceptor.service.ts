@@ -18,7 +18,7 @@ export const AppHttpInterceptor: HttpInterceptorFn = (
   const _storageService = inject(StorageService);
   const _languageService = inject(LanguageService);
 
-  const token = _storageService.getStorage(USER)?.token;
+  const token = _storageService.getStorage('token');
 
 
   let headersToAppend: any = {};
@@ -35,7 +35,7 @@ export const AppHttpInterceptor: HttpInterceptorFn = (
 
   const preferredLanguage = _languageService.getSelectedLanguage();
   if (preferredLanguage) {
-    headersToAppend['Accept-Language'] = preferredLanguage;
+    headersToAppend['lang'] = preferredLanguage;
   }
 
   let modifiedReq = req.clone({

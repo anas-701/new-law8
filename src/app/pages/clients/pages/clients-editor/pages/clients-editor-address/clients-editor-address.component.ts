@@ -16,5 +16,20 @@ export class ClientsEditorAddressComponent {
   @Input() formly: FormGroup=new FormGroup({});
   @Input() formlyModel: any;
   @Input() options:any;
-  formlyFields: any = clientsEditorAddressFormlyFieldsConfig()  ;
+  @Input() lookupsData: any = {};
+  formlyFields: any[] = [];
+  ngOnInit(): void {
+    if(this.lookupsData) this.formlyFields = clientsEditorAddressFormlyFieldsConfig(this);
+    // this.getLookupsData();
+  }
+  // getLookupsData(){
+  //   combineLatest({
+  //     country:this._apiService.get(API_Config.general.getCountryLookup),
+  //   }).pipe(
+  //     this._unsubscribe.takeUntilDestroy()
+  //   ).subscribe((res)=>{
+  //     this.lookupsData = res;
+  //     this.formlyFields = clientsEditorAddressFormlyFieldsConfig(this);
+  //   })
+  // } 
 }

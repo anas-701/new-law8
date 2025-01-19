@@ -1,6 +1,6 @@
 <form [formGroup]="formly" (ngSubmit)="onSubmit()">
     <app-clients-editor-main-info [formly]="formly" [formlyModel]="formlyModel" [options]="formlyOptions" />
-    <app-clients-editor-address [formly]="formly" [formlyModel]="formlyModel" [options]="formlyOptions" />
+    <app-clients-editor-address [formly]="formly" [formlyModel]="formlyModel" [options]="formlyOptions"  />
     <app-clients-editor-contact [formly]="formly" [formlyModel]="formlyModel" [options]="formlyOptions" />
 
     @if(!formlyOptions.formState?.readonly){
