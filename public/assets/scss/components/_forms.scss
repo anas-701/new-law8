@@ -1,5 +1,5 @@
 .p-field {
-  // @apply mb-8;
+
 
   label {
     @apply text-sm font-medium text-grey500 pb-1.5;
@@ -11,16 +11,18 @@
 
   .input-field {
 
-    @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-11	;
+    @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-11;
 
     .p-inputtext {
       @apply focus:outline-none p-0 border-0 focus:shadow-none w-full;
     }
   }
+
   .iti {
     @apply w-full;
-    input.iti__tel-input{
-      @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-11	rtl:text-end;
+
+    input.iti__tel-input {
+      @apply py-2.5 px-3.5 border border-borderPrimary rounded-lg h-11 rtl:text-end;
     }
   }
 
@@ -28,33 +30,80 @@
     @apply text-textErrorPrimary text-sm;
 
   }
-  app-formly-radio-button-field{
-    label{
+
+  app-formly-radio-button-field {
+    label {
       @apply text-sm font-medium pb-0 ms-2 text-textConfirmTitle font-sfProDisplay;
     }
-    @apply flex flex-row-reverse items-center  ;
-    input{
+
+    @apply flex flex-row-reverse items-center;
+
+    input {
       @apply scale-150;
     }
   }
-  .p-inputotp{
-    &-input{
-      @apply font-Manrope text-2xl font-extrabold size-14 rounded-xl border border-grey200  bg-grey50 focus:border focus:border-primary focus:shadow-none focus:bg-white
+
+  .p-inputotp {
+    &-input {
+      @apply font-Manrope text-2xl font-extrabold size-14 rounded-xl border border-grey200 bg-grey50 focus:border focus:border-primary focus:shadow-none focus:bg-white
     }
-    .p-filled{
+
+    .p-filled {
       @apply bg-blue25 border-0
     }
-    @apply gap-8 justify-center ;
+
+    @apply gap-8 justify-center;
   }
-  .p-dropdown,.p-multiselect{
-    &-label{
-      @apply py-2.5 px-3.5;
+
+  .p-dropdown,
+  .p-multiselect {
+    &-label {
+      @apply py-2.5 px-3.5 leading-normal;
     }
-    @apply w-full h-11 ;
+
+    &-clear-icon {
+      @apply start-[unset] end-12
+    }
+
+    &-filter {
+      @apply ms-[unset] me-2
+    }
+
+    &-close {
+      @apply me-[unset] ms-2
+    }
+
+    &-label-container {
+      @apply ps-[unset] pe-7
+    }
+
+    @apply w-full h-11;
+  }
+
+  .p-multiselect {
+    &-close {
+      @apply me-[unset] ms-2
+    }
   }
 
 }
+
+.p-checkbox {
+  @apply ms-[unset] me-2
+}
+
+.p-dropdown-filter {
+  @apply ms-[unset] me-2 ps-2 pe-7
+}
+
+.p-dropdown-filter-icon, .p-multiselect-filter-icon {
+  @apply start-[unset] end-3
+}
+.p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext{
+  @apply ps-2 pe-7
+}
+
 .p-password,
-.p-inputtext{
-  @apply  w-full
+.p-inputtext {
+  @apply w-full
 }

@@ -1,7 +1,7 @@
 export function clientsEditorContactFormlyFieldsConfig() {
     return [
         {
-            fieldGroupClassName: 'grid grid-cols-6 gap-4',
+            fieldGroupClassName: 'grid grid-cols-6 gap-4 mb-4',
             fieldGroup: [
                 {
                     key: 'mobile1',
@@ -28,7 +28,7 @@ export function clientsEditorContactFormlyFieldsConfig() {
             ]
         },
         {
-            fieldGroupClassName: 'grid grid-cols-6 gap-4',
+            fieldGroupClassName: 'grid grid-cols-6 gap-4 mb-4',
             fieldGroup: [
                 {
                     key: 'phone1',
