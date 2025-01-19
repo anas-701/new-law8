@@ -1,4 +1,5 @@
-export function clientsEditorAddressFormlyFieldsConfig(){
+import { ClientsEditorAddressComponent } from './clients-editor-address.component';
+export function clientsEditorAddressFormlyFieldsConfig(THIS:ClientsEditorAddressComponent){
   return [
     {
         fieldGroupClassName: 'grid grid-cols-6 gap-4',
@@ -16,7 +17,7 @@ export function clientsEditorAddressFormlyFieldsConfig(){
             },
           },
           {
-            key: 'zipCode',
+            key: 'zIpCode',
             type: 'input',
             className: 'md:col-span-2',
             props: {
@@ -28,12 +29,14 @@ export function clientsEditorAddressFormlyFieldsConfig(){
             },
           },
           {
-            key: 'country',
+            key: 'countryId',
             type: 'select',
             className: 'md:col-span-2',
             props: {
               label: 'Country',
-              optionsArr: ['Country 1', 'Country 2', 'Country 3'].map(item => ({ label: item, value: item })),
+              optionsArr: THIS.lookupsData.country,
+              optionLabel: 'name',
+              optionValue: 'id',
   
             },
             expressions: {

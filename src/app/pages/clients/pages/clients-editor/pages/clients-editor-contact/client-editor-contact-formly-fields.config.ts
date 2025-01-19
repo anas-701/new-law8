@@ -58,14 +58,17 @@ export function clientsEditorContactFormlyFieldsConfig() {
             fieldGroupClassName: 'grid grid-cols-6 gap-4',
             fieldGroup: [
                 {
-                    key: 'email1',
+                    key: 'email',
                     type: 'input',
                     className: 'md:col-span-2',
                     props: {
-                        label: 'Email 1',   
+                        label: 'Email 1',
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
+                    },
+                    validators: {
+                        validation: ['email'],
                     },
                 },
                 {
@@ -77,6 +80,9 @@ export function clientsEditorContactFormlyFieldsConfig() {
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
+                    },
+                    validators: {
+                        validation: ['email'],
                     },
                 },
             ]

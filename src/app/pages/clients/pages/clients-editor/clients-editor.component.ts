@@ -9,6 +9,10 @@ import { ToggleFormService } from 'src/app/@shared/modules/formly-config/service
 import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
 import { Router } from '@angular/router';
 import { FormlyFormOptions } from '@ngx-formly/core';
+import { combineLatest } from 'rxjs';
+import { ApiService } from 'src/app/@core/api/api.service';
+import { API_Config } from 'src/app/@core/api/api-config/api.config';
+import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
 
 @Component({
   selector: 'app-clients-editor',
@@ -29,6 +33,9 @@ import { FormlyFormOptions } from '@ngx-formly/core';
 export class ClientsEditorComponent implements OnInit {
   _toggleFormService = inject(ToggleFormService);
   _router = inject(Router);
+  _apiService = inject(ApiService); 
+  _unsubscribe = inject(UnsubscribeService);
+  lookupsData: any = {};
   formlyModel: any;
   formlyOptions: FormlyFormOptions={};
   formly: FormGroup = new FormGroup({});
@@ -68,6 +75,7 @@ export class ClientsEditorComponent implements OnInit {
       };
     }, 200);
   }
+  
 
   onSubmit() {
     this._toggleFormService.updateToggleEdit(true)

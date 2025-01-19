@@ -6,6 +6,10 @@ import { SharedSearchComponent } from 'src/app/@shared/components/shared-search/
 import { Router, RouterModule } from '@angular/router';
 import { PaginatorModule } from 'primeng/paginator';
 import { clients } from './client.fake';
+import { ApiService } from 'src/app/@core/api/api.service';
+import { API_Config } from 'src/app/@core/api/api-config/api.config';
+import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
+import { PAGESIZE } from 'src/app/@core/utilities/defines';
 
 @Component({
   selector: 'app-clients',
@@ -23,20 +27,39 @@ import { clients } from './client.fake';
 })
 export class ClientsComponent implements OnInit   {
   _router = inject(Router);
-  data: any[] = clients;
+  _apiService = inject(ApiService); 
+  _unsubscribeService = inject(UnsubscribeService); 
+  data: any[] = [];
   url:string='';
+  filterOptions: any = {
+    pageNum: 1,
+    pagSize: PAGESIZE,
+    orderByDirection: 'ASC',
+  }
   ngOnInit(): void {
     this.url=this._router.url.includes('inactive')?'/clients/inactive/view':'/clients/view';
-    if (!this._router.url.includes('add')) {
-      this.redirectToFirstClientInList()
-    }
-   
+    this.getClientsData();
+  }
+  getClientsData(){
+    this._apiService.get(API_Config.client.get).pipe(
+      this._unsubscribeService.takeUntilDestroy()
+    ).subscribe((res:any)=>{
+      this.data=res.data;
+      if (!this._router.url.includes('add')) {
+        this.redirectToFirstClientInList()
+      }
+    })
   }
 
+
   searchValueChange(value: string): void {
-    console.log(value)
+    this.filterOptions={...this.filterOptions,search:value};
+    this.getClientsData();
   }
   onPageChange(event: any): void {
+    this.filterOptions.pagSize = Number(event.rows);
+    this.filterOptions.pageNum = event.first / event.rows + 1;
+    this.getClientsData();
     console.log(event)
   }
   redirectToFirstClientInList(){
