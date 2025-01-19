@@ -60,6 +60,9 @@ export class ClientsComponent implements OnInit   {
 
 
   searchValueChange(value: string): void {
+    this.filterOptions.search = value;
+    this.filterOptions={...this.filterOptions}
+    this.getClientsData();
     console.log(value)
   }
   onPageChange(event: any): void {
