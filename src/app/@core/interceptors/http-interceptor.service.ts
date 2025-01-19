@@ -35,7 +35,7 @@ export const AppHttpInterceptor: HttpInterceptorFn = (
 
   const preferredLanguage = _languageService.getSelectedLanguage();
   if (preferredLanguage) {
-    headersToAppend['Accept-Language'] = preferredLanguage;
+    headersToAppend['lang'] = preferredLanguage;
   }
 
   let modifiedReq = req.clone({
