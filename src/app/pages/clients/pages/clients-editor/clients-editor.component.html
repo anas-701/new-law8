@@ -5,9 +5,9 @@
 
     @if(!formlyOptions.formState?.readonly){
     <div class="flex justify-end gap-2">
-        <app-shared-button [label]="'Cancel'|translate" [btnType]="'button'"
+        <app-shared-button [label]="'Cancel'|translate" [btnType]="'button'" [isLoading]="isLoading"
             [styleClass]="'border border-grey500 text-grey500 font-sfProDisplay !text-sm !py-1 !font-medium !leading-8 hover:border-primary hover:text-primary'" />
-        <app-shared-button [label]="'Save'|translate" [btnType]="'submit'"
+        <app-shared-button [label]="'Save'|translate" [btnType]="'submit'" [isLoading]="isLoading"
             [styleClass]="'bg-primary text-white font-sfProDisplay !text-sm !py-1 !font-medium !leading-8'" />
     </div>
     }
