@@ -54,6 +54,8 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     className: 'md:col-span-2',
                     props: {
                         label: 'Foreign Name',
+                        btnIcon:'icon-speech !text-2xl hover:!text-primary',
+                        btnClass:"!p-0 "
 
                     },
                     expressions: {
