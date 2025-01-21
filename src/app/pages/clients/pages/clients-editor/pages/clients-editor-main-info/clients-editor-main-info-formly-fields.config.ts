@@ -22,10 +22,10 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     key: 'clientCode',
                     type: 'input',
                     className: 'md:col-span-2',
+                    defaultValue:THIS.lookupsData?.clientCode?.result,
                     props: {
                         label: 'Client Code',
-                        disabled: true,
-                        value: THIS.lookupsData?.clientCode
+                        disabled: true
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
@@ -50,7 +50,7 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     key: THIS._languageService.getSelectedLanguage() == 'en'
                     ? 'nameAr'
                     : 'nameEn',
-                    type: 'input',
+                    type: 'input-btn',
                     className: 'md:col-span-2',
                     props: {
                         label: 'Foreign Name',
@@ -67,6 +67,7 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     props: {
                         label: 'Client Group',
                         optionsArr: [],
+                        selectedObj:{},
                         optionLabel: 'name',
                         optionValue: 'id',
                         onChange:()=>{
@@ -85,6 +86,7 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     props: {
                         label: 'Introducing Lawyer',
                         optionsArr: [],
+                        selectedObj:{},
                         optionLabel: 'name',
                         optionValue: 'id',
 

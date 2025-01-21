@@ -21,69 +21,86 @@ import { findField } from 'src/app/@core/utilities/functions/find-field';
   styleUrl: './clients-editor-main-info.component.scss'
 })
 export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getClientGroupOptions();
+    this.getIntroducingLawyerOptions()
+  }
 
   _apiService = inject(ApiService);
   _unsubscribe = inject(UnsubscribeService);
-  _languageService = inject(LanguageService); 
+  _languageService = inject(LanguageService);
   @Input() formly: FormGroup = new FormGroup({});
   @Input() formlyModel: any;
   @Input() options: any;
   @Input() lookupsData: any;
-  formlyFields: any[] = clientsEditorMainInfoFormlyFieldsConfig(this);  
+  formlyFields: any[] = clientsEditorMainInfoFormlyFieldsConfig(this);
   ngOnInit(): void {
-   
+
     this.getLookupsData();
-    
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  //  if(changes['lookupsData']?.currentValue) {
-  //   this.lookupsData=changes['lookupsData'].currentValue;
-  //   this.formlyFields = clientsEditorMainInfoFormlyFieldsConfig(this);
-
-  //   console.log('this.lookupsData',this.lookupsData)
-  //  }
-  }
-  getClientGroupOptions(){
-    const clientGroupField:FieldTypeConfig =findField(this.formlyFields,'clientGroupId');
-    console.log('getClientGroupOptions', this.lookupsData)
-    if(clientGroupField){
-      clientGroupField.props['optionsArr'] = this.lookupsData?.clientGroup?.result;
-      this.formlyModel.clientGroupId = this.setClientGroupValue();
-      this.formlyModel={...this.formlyModel}
-      console.log(this.formlyModel)
-      console.log('clientGroupField',clientGroupField)
-    }
-    
-    
-  }
-
-  setClientGroupValue(){
-    const selectedClientGroup = this.lookupsData?.clientGroup?.result.find((obj:any)=>obj.id==this.formlyModel.clientGroupId)
-    if(!selectedClientGroup) return null;
-    return{
-      label:selectedClientGroup?.name,
-      value:selectedClientGroup?.id
-    }
 
   }
-  
-  getLookupsData(){
+  getLookupsData() {
     combineLatest({
-      clientCode:this._apiService.post(API_Config.client.getOrNewClientCode, null),
-      introducingLawyer:this._apiService.get(API_Config.general.getLawyerShort),
-      // country:this._apiService.get(API_Config.general.getCountryLookup),
-      clientGroup:this._apiService.get(API_Config.general.getClientGroups,{ orderByDirection: 'ASC' }
+      clientCode: this._apiService.post(API_Config.client.getOrNewClientCode, null),
+      introducingLawyer: this._apiService.get(API_Config.general.getLawyerShort),
+      clientGroup: this._apiService.get(API_Config.general.getClientGroups, { orderByDirection: 'ASC' }
       ),
     }).pipe(
       this._unsubscribe.takeUntilDestroy()
-    ).subscribe((res)=>{  
+    ).subscribe((res) => {
       this.lookupsData = res;
       this.formlyFields = clientsEditorMainInfoFormlyFieldsConfig(this);
       setTimeout(() => {
-        
-        this.getClientGroupOptions()
+
+        this.getClientGroupOptions();
+        this.getIntroducingLawyerOptions()
       }, 100);
     })
-  }   
+  }
+  getClientGroupOptions() {
+    const clientGroupField: FieldTypeConfig = findField(this.formlyFields, 'clientGroupId');
+    console.log('getClientGroupOptions', this.lookupsData)
+    if (clientGroupField) {
+      clientGroupField.props['optionsArr'] = this.lookupsData?.clientGroup?.result//.map((obj:any)=>({label:obj.name,value:obj}));
+
+      if (this.formlyModel?.clientGroupId) {
+        clientGroupField.props['selectedObj'] = this.setClientGroupValue()
+      }
+    }
+
+
+  }
+  getIntroducingLawyerOptions() {
+    const introducingLawyerField: FieldTypeConfig = findField(this.formlyFields, 'introducingLawyer');
+    console.log('getClientGroupOptions', this.lookupsData)
+    if (introducingLawyerField) {
+      introducingLawyerField.props['optionsArr'] = this.lookupsData?.introducingLawyer?.result;
+      console.log('getIntroducingLawyerOptions', this.formlyModel?.introducingLawyer)
+      if (this.formlyModel?.introducingLawyer) {
+        introducingLawyerField.props['selectedObj'] = this.setIntroducingLawyerValue()
+      }
+    }
+  }
+
+  setClientGroupValue() {
+    const selectedClientGroup = this.lookupsData?.clientGroup?.result.find((obj: any) => obj.id == this.formlyModel?.clientGroupId)
+    if (!selectedClientGroup) return null;
+    return {
+      label: selectedClientGroup?.name,
+      value: selectedClientGroup?.id
+    }
+
+  }
+  setIntroducingLawyerValue() {
+    const selectedIntroducingLawyer = this.lookupsData?.introducingLawyer?.result.find((obj: any) => obj.id == this.formlyModel?.introducingLawyer)
+    console.log('selectedIntroducingLawyer', selectedIntroducingLawyer)
+    if (!selectedIntroducingLawyer) return null;
+    return {
+      label: selectedIntroducingLawyer?.name,
+      value: selectedIntroducingLawyer?.id
+    }
+
+  }
+
+  
 }

@@ -25,11 +25,11 @@ export class ClientsDetailsComponent {
   _router = inject(Router);
   _dialogService = inject(DialogService);
   toggleEdit: boolean = true;
-  url = this._router.url.includes('inactive') ? '/clients/inactive/view/1' : '/clients/view/1';
+  url = this._router.url.includes('inactive') ? '/clients/inactive/view' : '/clients/view';
   items: MenuItem[] = [
-    { label: 'Details', routerLink: [this.url], routerLinkActiveOptions: { exact: true } },
-    { label: 'Contacts', routerLink: [this.url + '/contacts'], routerLinkActiveOptions: { exact: true } },
-    { label: 'Matters', routerLink: [this.url + '/matters'], routerLinkActiveOptions: { exact: true } }
+    { label: 'Details', routerLink: [this._router.url], routerLinkActiveOptions: { exact: true } },
+    { label: 'Contacts', routerLink: [this._router.url + '/contacts'], routerLinkActiveOptions: { exact: true } },
+    { label: 'Matters', routerLink: [this._router.url + '/matters'], routerLinkActiveOptions: { exact: true } }
   ];
   onEdit() {
     this.toggleEdit = !this.toggleEdit;

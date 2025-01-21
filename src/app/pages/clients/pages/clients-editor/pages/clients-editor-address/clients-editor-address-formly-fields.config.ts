@@ -36,7 +36,7 @@ export function clientsEditorAddressFormlyFieldsConfig(THIS: ClientsEditorAddres
             className: 'md:col-span-2',
             props: {
               label: 'Country',
-              optionsArr: ['Country 1', 'Country 2', 'Country 3'].map(item => ({ label: item, value: item })),
+              optionsArr: []
   
             },
             expressions: {

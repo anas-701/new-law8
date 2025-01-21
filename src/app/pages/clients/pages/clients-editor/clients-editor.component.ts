@@ -44,18 +44,13 @@ export class ClientsEditorComponent implements OnInit {
   clientIdentifier: any;
   toggleEditEffect = effect(() => {
     if (!this._router.url.includes('add')) {
-      console.log(this._toggleFormService.getToggleEdit())
       this.formlyOptions.formState.readonly = this._toggleFormService.getToggleEdit();
     }
   })
   ngOnInit(): void {
-
-    // this.getLookupsData()
     if (!this._router.url.includes('add')) {
       this.getParams()
     }
-
-
   }
   getParams() {
     this._route.params.pipe(
@@ -65,23 +60,6 @@ export class ClientsEditorComponent implements OnInit {
       this.setFormData();
     })
   }
-  // getLookupsData() {
-  //   combineLatest({
-  //     clientCode: this._apiService.post(API_Config.client.getOrNewClientCode, null),
-  //     introducingLawyer: this._apiService.get(API_Config.general.getLawyerShort),
-  //     country: this._apiService.get(API_Config.general.getCountryLookup),
-  //     clientGroup: this._apiService.get(API_Config.general.getClientGroups, { orderByDirection: 'ASC' }),
-  //   }).pipe(
-  //     this._unsubscribe.takeUntilDestroy()
-  //   ).subscribe((res) => {
-  //     this.lookupsData = res;
-  //     this.lookupsData={...this.lookupsData}
-  //     if (!this._router.url.includes('add')) {
-  //       this.getParams()
-  //     }
-
-  //   })
-  // }
 
   setFormData() {
     this._apiService.get(API_Config.client.getById, { id: this.clientIdentifier }).pipe(
@@ -101,6 +79,7 @@ export class ClientsEditorComponent implements OnInit {
     };
     this.isLoading = true;
     let payload = {
+      ...this.formly.value,
       phone1: this.formly.value?.phone1?.internationalNumber,
       phone2: this.formly.value?.phone2?.internationalNumber,
       mobile1: this.formly.value?.mobile1?.internationalNumber
@@ -110,6 +89,7 @@ export class ClientsEditorComponent implements OnInit {
         ? this.formly.value?.mobile2?.internationalNumber
         : this.formly.value.mobile2,
     };
+    console.log('payload', payload);
     const path = this.clientIdentifier
       ? API_Config.client.update
       : API_Config.client.create;

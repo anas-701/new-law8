@@ -1,5 +1,5 @@
 @if(props['readonly']){
-<p class="text-textSecondary text-sm font-bold font-sfProDisplay mt-3">{{formControl.value?.label}}</p>
+<p class="text-textSecondary text-sm font-bold font-sfProDisplay mt-3">{{field.props['selectedObj']?.label}}</p>
 }@else{
 <div class="p-fluid">
     <p-dropdown [editable]="props['editable'] || false" [formControl]="formControl" [formlyAttributes]="field"

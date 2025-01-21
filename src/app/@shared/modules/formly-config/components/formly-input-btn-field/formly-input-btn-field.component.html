@@ -1,0 +1,6 @@
+<div class="input-field flex items-center"
+    [ngClass]="{'!border-borderErrorSubtle': formControl.invalid && formControl.touched,'!w-14':!fullWidth , '!w-full':fullWidth}">
+    <input type="text" pInputText [formControl]="formControl" [formlyAttributes]="field"
+        [class]="props['class']" [placeholder]="props['placeholder']" (input)="onInput($event)"  />
+    <app-shared-button [icon]="props['btnIcon']" [styleClass]="props['btnClass']" (onClick)="toggleWidth()"/>
+</div>

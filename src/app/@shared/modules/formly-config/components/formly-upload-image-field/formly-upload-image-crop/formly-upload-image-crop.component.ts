@@ -2,16 +2,21 @@ import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, ImageCropperComponent, ImageTransform } from 'ngx-image-cropper';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { SliderModule } from 'primeng/slider';
+
 @Component({
   selector: 'app-formly-upload-image-crop',
   standalone: true,
   imports: [
     ImageCropperComponent,
     SharedButtonComponent,
-    TranslateModule
+    TranslateModule,
+    FormsModule,
+    SliderModule
   ],
   templateUrl: './formly-upload-image-crop.component.html',
   styleUrl: './formly-upload-image-crop.component.scss'
@@ -57,4 +62,12 @@ export class FormlyUploadImageCropComponent {
     this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl || event.base64 || '');
     // event.blob can be used to upload the cropped image
   }
+  scale: number = 1; // التكبير الافتراضي
+  transform: ImageTransform = {};
+  onScaleChange(): void {
+    this.transform = {
+      ...this.transform,
+      scale: this.scale
+    };
+  } 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
@@ -6,7 +6,12 @@ import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
   templateUrl: './formly-select-field.component.html',
   styleUrl: './formly-select-field.component.scss'
 })
-export class FormlySelectFieldComponent  extends FieldType <FieldTypeConfig>{
+export class FormlySelectFieldComponent  extends FieldType <FieldTypeConfig> implements OnInit{
+  ngOnInit(): void {
+    console.log('field',this.field)
+    console.log('formcontrol',this.formControl)
+    console.log('model',this.model)
+  }
   change(e?: any) {
     if (this.props['onChange']) this.props['onChange'](e, this.field)
   }

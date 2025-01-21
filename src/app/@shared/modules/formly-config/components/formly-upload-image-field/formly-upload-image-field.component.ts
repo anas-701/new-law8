@@ -36,7 +36,8 @@ export class FormlyUploadImageFieldComponent extends FieldType<FieldTypeConfig> 
   }
   onCropEditor() {
     const ref = this._dialogService.open(FormlyUploadImageCropComponent, {
-      width: '40vw',
+      header: 'Crop Image',
+      width: '510px',
       data: this.file,
     });
     ref.onClose.pipe(this._unsubscribeService.takeUntilDestroy()).subscribe({
