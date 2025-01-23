@@ -7,12 +7,13 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
             fieldGroupClassName: 'grid grid-cols-6 gap-4',
             fieldGroup: [
                 {
-                    key: 'clientImage',
+                    key: 'image',
                     type: 'upload-image',
                     className: 'col-span-6',
                     props: {
                         label: 'Client Image',
                         hint: 'Recommended Size 400*400 ',
+                        required:true
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',

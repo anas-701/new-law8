@@ -59,7 +59,6 @@ export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
   }
   getClientGroupOptions() {
     const clientGroupField: FieldTypeConfig = findField(this.formlyFields, 'clientGroupId');
-    console.log('getClientGroupOptions', this.lookupsData)
     if (clientGroupField) {
       clientGroupField.props['optionsArr'] = this.lookupsData?.clientGroup?.result//.map((obj:any)=>({label:obj.name,value:obj}));
 
@@ -72,10 +71,8 @@ export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
   }
   getIntroducingLawyerOptions() {
     const introducingLawyerField: FieldTypeConfig = findField(this.formlyFields, 'introducingLawyer');
-    console.log('getClientGroupOptions', this.lookupsData)
     if (introducingLawyerField) {
       introducingLawyerField.props['optionsArr'] = this.lookupsData?.introducingLawyer?.result;
-      console.log('getIntroducingLawyerOptions', this.formlyModel?.introducingLawyer)
       if (this.formlyModel?.introducingLawyer) {
         introducingLawyerField.props['selectedObj'] = this.setIntroducingLawyerValue()
       }
@@ -93,7 +90,6 @@ export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
   }
   setIntroducingLawyerValue() {
     const selectedIntroducingLawyer = this.lookupsData?.introducingLawyer?.result.find((obj: any) => obj.id == this.formlyModel?.introducingLawyer)
-    console.log('selectedIntroducingLawyer', selectedIntroducingLawyer)
     if (!selectedIntroducingLawyer) return null;
     return {
       label: selectedIntroducingLawyer?.name,

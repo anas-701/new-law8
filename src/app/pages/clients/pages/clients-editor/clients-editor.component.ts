@@ -14,6 +14,9 @@ import { API_Config } from 'src/app/@core/api/api-config/api.config';
 import { ApiRes } from 'src/app/@core/models/apiRes-model';
 import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
 import { ApiService } from 'src/app/@core/api/api.service';
+import { ToastrNotifiService } from 'src/app/@core/services';
+import { objectToFormData } from 'src/app/@core/utilities/functions/objectToFormData';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-clients-editor',
@@ -37,6 +40,7 @@ export class ClientsEditorComponent implements OnInit {
   _route = inject(ActivatedRoute);
   _unsubscribe = inject(UnsubscribeService);
   _apiService = inject(ApiService);
+  _toastrNotifiService=inject(ToastrNotifiService)
   isLoading!: boolean;
   formlyModel: any;
   formlyOptions: FormlyFormOptions = {};
@@ -68,6 +72,8 @@ export class ClientsEditorComponent implements OnInit {
     ).subscribe({
       next: (res: ApiRes) => {
         this.formlyModel = res.result;
+        this.formlyModel.image=res.result.imagePath?environment.baseUrl+res.result.imagePath:null;
+        this.formlyModel={...this.formlyModel}
       }
     })
   }
@@ -89,24 +95,23 @@ export class ClientsEditorComponent implements OnInit {
         ? this.formly.value?.mobile2?.internationalNumber
         : this.formly.value.mobile2,
     };
-    console.log('payload', payload);
     const path = this.clientIdentifier
       ? API_Config.client.update
       : API_Config.client.create;
-
-    // console.log(this.formlyModel);
+      
     this._apiService
-      .post(path, payload)
+      .post(path, objectToFormData(payload))
       .pipe(
         finalize(() => (this.isLoading = false)),
         this._unsubscribe.takeUntilDestroy()
       )
       .subscribe({
         next: (res: ApiRes) => {
-
+          if(res.isSuccess){
+            this._toastrNotifiService.displaySuccess(res.message)
+          }
         },
       });
     this._toggleFormService.updateToggleEdit(true)
-    console.log(this.formlyModel);
   }
 }

@@ -10,7 +10,12 @@ export const clientsRoutes: Routes = [
         loadComponent: () => import('./pages/clients-editor/clients-editor.component').then(m => m.ClientsEditorComponent),
     },
     {
-        path: 'inactive',
+        path: 'inactive/view',
+        loadComponent: () => import('./pages/clients-details/clients-details.component').then(m => m.ClientsDetailsComponent),
+        loadChildren: () => import('./pages/clients-details/client-details.routes').then(m => m.ClientDetailsRoutes) 
+    },
+    {
+        path: 'inactive/view/:id',
         loadComponent: () => import('./pages/clients-details/clients-details.component').then(m => m.ClientsDetailsComponent),
         loadChildren: () => import('./pages/clients-details/client-details.routes').then(m => m.ClientDetailsRoutes) 
     },

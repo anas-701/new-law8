@@ -23,14 +23,12 @@ export abstract class TableBaseClass  {
   tableColumns:any[] = []
   tableData:any [] = []
   tempTableData:any [] = []
-  pagination: PaginationDTO= { pageSize: PAGESIZE, page: 0 , totalElements:0 };
+  // pagination: PaginationDTO= { pageSize: PAGESIZE, page: 0 , totalElements:0 };
 
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
   _dynamicDialogConfig = inject(DynamicDialogConfig);
   _dynamicDialogRef = inject(DynamicDialogRef);
-  _confirmModalService = inject(ConfirmModalService);
-  _successModalService = inject(SuccessModalService);
   _route = inject(ActivatedRoute);
   _router = inject(Router);
   _unsubscribe = inject(CUSTOM_UNSUBSCRIBE_TOKEN);
@@ -44,7 +42,7 @@ export abstract class TableBaseClass  {
 
   //on page change
   onPageChange(e: any) {
-    this.pagination.page = e.page;
+    // this.pagination.page = e.page;
     this.getTableData();
   }
   //on export excel

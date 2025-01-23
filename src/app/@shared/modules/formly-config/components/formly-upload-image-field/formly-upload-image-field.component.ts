@@ -18,7 +18,7 @@ export class FormlyUploadImageFieldComponent extends FieldType<FieldTypeConfig> 
   _unsubscribeService = inject(UnsubscribeService);
   uploadedImage!: string;
   ngOnInit(): void {
-    this.uploadedImage = this.formControl.value
+    this.uploadedImage = this.formControl.value;
   }
   onFileChange(event: any) {
     const input = event.target as HTMLInputElement;

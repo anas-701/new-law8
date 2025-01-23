@@ -22,7 +22,7 @@
             <a href="javascript:void(0)" [routerLink]="[url, client.id]" [routerLinkActive]="'active'"
                 class="flex justify-between py-4 ps-4 pe-2 rounded-lg border-2 border-white cursor-pointer hover:bg-white relative before:h-0 before:w-0 before:bg-primary before:rounded-full before:absolute before:top-2.5 before:-start-1.5 before:transition-all before:duration-300 before:ease-in-out hover:before:h-4/6 hover:before:w-1">
                 <div class="flex justify-between gap-2">
-                    <img src="assets/images/user-avatar.svg" alt="client" class="size-10 rounded-full">
+                    <img [src]="client.imagePath||'assets/images/user-avatar.svg'" alt="client" class="size-10 rounded-full">
                     <div>
                         <h1
                             class="font-sfProDisplay font-bold text-sm text-textSecondary mb-2 transition-colors duration-300 ease-in-out ">

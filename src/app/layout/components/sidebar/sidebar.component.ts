@@ -36,11 +36,10 @@ export class SidebarComponent implements OnInit{
       });
   }
   ngOnInit(): void {
-    console.log(this._menuService.pagesMenu)
+
   }
 
   public toggleMenu(subMenu: SubMenuItem) {
-    console.log('submenu',subMenu)
     this._menuService.pagesMenu.forEach(page => {
       page.items.forEach(item => {
         if (item !== subMenu) {
@@ -52,11 +51,6 @@ export class SidebarComponent implements OnInit{
   }
 
   isActive(route: string): boolean {
-    // if(route==='/clients'){
-    //   console.log('route '+route,this.currentUrl.includes(route));
-    //   console.log('route1 '+route,this.currentUrl===route);
-    //   return true
-    // }
     return this.currentUrl===route;
   }
 }
