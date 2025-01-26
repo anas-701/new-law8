@@ -49,6 +49,7 @@ export class ClientsComponent implements OnInit {
     }
   })
   ngOnInit(): void {
+    console.log('ngOnInit')
     this.url = this._router.url.includes('inactive') ? '/clients/inactive/view' : '/clients/view';
     this.getData()
     this._clientService.refreshData$.pipe(

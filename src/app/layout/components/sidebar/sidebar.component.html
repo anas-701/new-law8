@@ -152,7 +152,7 @@
                       @if(item.children?.length){
                          <span class="font-sfProDisplay text-sm ps-4 font-medium">{{ item.label |translate}}</span>
                       }@else {
-                         <a class="font-sfProDisplay text-sm ps-4 font-medium" [routerLink]="item.route" >{{ item.label |translate}}</a>
+                         <a class="font-sfProDisplay text-sm ps-4 font-medium" [routerLink]="item.route" [queryParams]="item.queryParams">{{ item.label |translate}} {{item.queryParams}}</a>
                       }
                    }
                   

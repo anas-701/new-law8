@@ -52,6 +52,7 @@ export class ClientsEditorComponent implements OnInit {
     }
   })
   ngOnInit(): void {
+    console.log('ngOnInit')
     if (!this._router.url.includes('add')) {
       this.getParams()
     }
@@ -71,9 +72,11 @@ export class ClientsEditorComponent implements OnInit {
       this._unsubscribe.takeUntilDestroy()
     ).subscribe({
       next: (res: ApiRes) => {
-        this.formlyModel = res.result;
-        this.formlyModel.image=res.result.imagePath?environment.baseUrl+res.result.imagePath:null;
-        this.formlyModel={...this.formlyModel}
+        if(res.isSuccess){
+          this.formlyModel = res.result;
+          // this.formlyModel.image=res.result?.imagePath?environment.baseUrl+res.result?.imagePath:null;
+          // this.formlyModel={...this.formlyModel}
+        }
       }
     })
   }
