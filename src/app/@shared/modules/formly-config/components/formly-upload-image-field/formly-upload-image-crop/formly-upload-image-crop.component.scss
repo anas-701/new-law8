@@ -16,7 +16,9 @@
     .slider-container {
         @apply w-2/3 mx-auto;
     }
-
+    .ngx-ic-source-image{
+        @apply w-full h-96
+    }
 
 }
 ::ng-deep {
