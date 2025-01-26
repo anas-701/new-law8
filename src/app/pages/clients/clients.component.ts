@@ -50,7 +50,7 @@ export class ClientsComponent implements OnInit,OnDestroy {
     }
   })
   ngOnInit(): void {
-    this.url = this._router.url.includes('inactive') ? '/inactive/clients/view' : '/clients/view';
+    this.url = this._router.url.includes('inactive') ? '/clients/inactive/view' : '/clients/view';
     this.getQueryParams()
     this._clientService.refreshData$.pipe(
       this._unsubscribeService.takeUntilDestroy()

@@ -9,18 +9,4 @@ export const clientsRoutes: Routes = [
         path: 'add',
         loadComponent: () => import('./pages/clients-editor/clients-editor.component').then(m => m.ClientsEditorComponent),
     },
-    // {
-    //     path: 'inactive',
-    //     loadComponent: () => import('./clients.component').then(m => m.ClientsComponent),
-    //     loadChildren: () => import('./pages/clients-details/client-details.routes').then(m => m.ClientDetailsRoutes) 
-    // },
-    // {
-    //     path: ':type',
-    //     loadComponent: () => import('./clients.component').then(m => m.ClientsComponent),
-    // },
-    // {
-    //     path: 'inactive/view/:id',
-    //     loadComponent: () => import('./pages/clients-details/clients-details.component').then(m => m.ClientsDetailsComponent),
-    //     loadChildren: () => import('./pages/clients-details/client-details.routes').then(m => m.ClientDetailsRoutes) 
-    // },
 ]

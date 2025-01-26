@@ -24,7 +24,7 @@ export class Menu {
             },
             {
               label: 'In Active Clients',
-              route: '/inactive/clients'
+              route: '/clients/inactive'
             }
           ] 
         },
