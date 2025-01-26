@@ -50,7 +50,7 @@ export class ClientsComponent implements OnInit,OnDestroy {
     }
   })
   ngOnInit(): void {
-    this.url = this._router.url.includes('inactive') ? '/clients/inactive/view' : '/clients/view';
+    this.url = this._router.url.includes('inactive') ? '/inactive/clients/view' : '/clients/view';
     this.getQueryParams()
     this._clientService.refreshData$.pipe(
       this._unsubscribeService.takeUntilDestroy()
@@ -80,7 +80,8 @@ export class ClientsComponent implements OnInit,OnDestroy {
     
   }
   getQueryParams(){
-    this._route.queryParams.pipe(this._unsubscribeService.takeUntilDestroy()).subscribe((params:Params) => {
+    this._route.paramMap.pipe(this._unsubscribeService.takeUntilDestroy()).subscribe((params:any) => {
+      // const currentUrl = urlSegments.map((segment:any) => segment.path).join('/');
       console.log(params)
       this.getData()
     })

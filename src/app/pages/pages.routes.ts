@@ -11,6 +11,11 @@ export const PAGES_ROUTES: Routes = [
         loadChildren: () => import('./clients/clients.routes').then(m => m.clientsRoutes)
     },
     {
+        path: 'inactive/clients',	
+        loadComponent: () => import('./clients/clients.component').then(m => m.ClientsComponent),
+        loadChildren: () => import('./clients/clients.routes').then(m => m.clientsRoutes)
+    },
+    {
         path: '',
         redirectTo: 'clients',
         pathMatch: 'full'
