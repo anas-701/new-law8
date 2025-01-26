@@ -1,9 +1,9 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { SharedEmptySectionComponent } from 'src/app/@shared/components/shared-empty-section/shared-empty-section.component';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedSearchComponent } from 'src/app/@shared/components/shared-search/shared-search.component';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { PaginatorModule } from 'primeng/paginator';
 import { ApiService } from 'src/app/@core/api/api.service';
 import { API_Config } from 'src/app/@core/api/api-config/api.config';
@@ -28,8 +28,9 @@ import { ClientService } from './services/client.service';
   templateUrl: './clients.component.html',
   styleUrl: './clients.component.scss'
 })
-export class ClientsComponent implements OnInit {
+export class ClientsComponent implements OnInit,OnDestroy {
   _router = inject(Router);
+  _route = inject(ActivatedRoute);
   _apiService = inject(ApiService);
   _toggleFormService = inject(ToggleFormService);
   _clientService = inject(ClientService)
@@ -49,9 +50,8 @@ export class ClientsComponent implements OnInit {
     }
   })
   ngOnInit(): void {
-    console.log('ngOnInit')
     this.url = this._router.url.includes('inactive') ? '/clients/inactive/view' : '/clients/view';
-    this.getData()
+    this.getQueryParams()
     this._clientService.refreshData$.pipe(
       this._unsubscribeService.takeUntilDestroy()
     ).subscribe({
@@ -77,6 +77,13 @@ export class ClientsComponent implements OnInit {
         this.redirectToFirstClientInList()
       }
     })
+    
+  }
+  getQueryParams(){
+    this._route.queryParams.pipe(this._unsubscribeService.takeUntilDestroy()).subscribe((params:Params) => {
+      console.log(params)
+      this.getData()
+    })
   }
 
 
@@ -94,5 +101,8 @@ export class ClientsComponent implements OnInit {
   redirectToFirstClientInList() {
     // this._toggleFormService.updateToggleEdit(true)
     this._router.navigate([this.url, this.data[0]?.id])
+  }
+  ngOnDestroy(): void {
+    this._unsubscribeService.destroy();
   }
 }

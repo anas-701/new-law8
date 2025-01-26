@@ -25,7 +25,7 @@ export class Menu {
             {
               label: 'In Active Clients',
               route: '/clients',
-              queryParams: {queryParams:{ type: "inactive" }}
+              queryParams: { type: "inactive" }
             }
           ] 
         },

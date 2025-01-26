@@ -152,7 +152,7 @@
                       @if(item.children?.length){
                          <span class="font-sfProDisplay text-sm ps-4 font-medium">{{ item.label |translate}}</span>
                       }@else {
-                         <a class="font-sfProDisplay text-sm ps-4 font-medium" [routerLink]="item.route" [queryParams]="item.queryParams">{{ item.label |translate}} {{item.queryParams}}</a>
+                         <a class="font-sfProDisplay text-sm ps-4 font-medium" [routerLink]="item.route">{{ item.label |translate}} </a>
                       }
                    }
                   
@@ -167,7 +167,7 @@
                  }">
                    @for (item of item.children; track $index) {
                       <li class="pe-5 py-2 relative before:border-b  before:absolute before:w-[25px] before:h-[110%] before:border-s before:rounded-bl before:-top-[23px] before:-start-[30px] before:border-borderPrimary before:first-of-type:h-2/3 before:first-of-type:-top-[6px]  group-hover:before:border-blue200" [ngClass]="{'!before:border-blue200':isActive(item.route)}">
-                         <a [routerLink]="item.route"  class="font-sfProDisplay text-sm font-normal text-[11px]" [ngClass]="{'!font-medium':isActive(item.route)}">{{item.label|translate}}</a>
+                         <a [routerLink]="item.route" [queryParams]="item.queryParams"  class="font-sfProDisplay text-sm font-normal text-[11px]" [ngClass]="{'!font-medium':isActive(item.route)}">{{item.label|translate}}</a>
                       </li>
                    }
                 </ul>
