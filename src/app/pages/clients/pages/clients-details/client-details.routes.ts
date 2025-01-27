@@ -7,7 +7,7 @@ export const ClientDetailsRoutes: Routes = [
     },
     {
         path: 'contacts',
-        loadComponent: () => import('./pages/client-details-contacts-editor/client-details-contacts-editor.component').then(m => m.ClientDetailsContactsEditorComponent)
+        loadComponent: () => import('./pages/client-details-contacts/client-details-contacts.component').then(m => m.ClientDetailsContactsComponent)
     },
     {
         path: 'matters',

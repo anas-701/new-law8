@@ -6,6 +6,10 @@ export const clientsRoutes: Routes = [
         loadChildren: () => import('./pages/clients-details/client-details.routes').then(m => m.ClientDetailsRoutes) 
     },
     {
+        path: 'update/:id',
+        loadComponent: () => import('./pages/clients-editor/clients-editor.component').then(m => m.ClientsEditorComponent), 
+    },
+    {
         path: 'add',
         loadComponent: () => import('./pages/clients-editor/clients-editor.component').then(m => m.ClientsEditorComponent),
     },

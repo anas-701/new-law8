@@ -13,6 +13,7 @@ import { ApiRes } from 'src/app/@core/models/apiRes-model';
 import { ToggleFormService } from 'src/app/@shared/modules/formly-config/services/toggle-form.service';
 import { AsyncPipe } from '@angular/common';
 import { ClientService } from './services/client.service';
+import { clients } from './client.fake';
 
 @Component({
   selector: 'app-clients',
@@ -63,17 +64,17 @@ export class ClientsComponent implements OnInit,OnDestroy {
   }
 
   getData() {
+    this.data=clients
     this.filterOptions = {
       ...this.filterOptions,
       isActive: this._router.url.includes('inactive') ? false : true
     }
-    console.log('getData')
     this._apiService.get(API_Config.client.get, this.filterOptions).pipe(
       this._unsubscribeService.takeUntilDestroy()
     ).subscribe((res: ApiRes) => {
       this.data = res.result.dataList || [];
       this.totalCount = res.result.totalCount;
-      if (!this._router.url.includes('add')) {
+      if (this._router.url.includes('view')) {
         this.redirectToFirstClientInList()
       }
     })

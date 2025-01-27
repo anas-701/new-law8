@@ -16,7 +16,9 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
+                        'hide': ()=>THIS._router.url.includes('view'),
                     },
+
                 },
                 {
                     key: 'clientCode',
