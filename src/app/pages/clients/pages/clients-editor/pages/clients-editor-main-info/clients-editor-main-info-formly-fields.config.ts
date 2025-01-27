@@ -13,7 +13,6 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     props: {
                         label: 'Client Image',
                         hint: 'Recommended Size 400*400 ',
-                        required:true
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',

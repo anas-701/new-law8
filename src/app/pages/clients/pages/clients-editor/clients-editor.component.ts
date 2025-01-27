@@ -101,12 +101,13 @@ export class ClientsEditorComponent implements OnInit {
         ? this.formly.value?.mobile2?.internationalNumber
         : this.formly.value.mobile2,
     };
+    const body = this.clientIdentifier?{...payload,id:this.clientIdentifier}:payload
     const path = this.clientIdentifier
       ? API_Config.client.update
       : API_Config.client.create;
       
     this._apiService
-      .post(path, objectToFormData(payload))
+      .post(path, objectToFormData(body))
       .pipe(
         finalize(() => (this.isLoading = false)),
         this._unsubscribe.takeUntilDestroy()
