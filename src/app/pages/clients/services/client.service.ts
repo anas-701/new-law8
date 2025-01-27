@@ -8,6 +8,7 @@ export class ClientService {
   refreshData:WritableSignal<boolean> = signal<boolean>(false);
 
   refreshData$=new BehaviorSubject(false)
+  client$=new BehaviorSubject({})
  
   setRefreshData(value:boolean){
     this.refreshData.set(value)

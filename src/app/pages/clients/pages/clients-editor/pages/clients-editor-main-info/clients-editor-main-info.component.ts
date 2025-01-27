@@ -10,6 +10,7 @@ import { LanguageService } from 'src/app/@core/services/language.service';
 import { EventEmitter } from 'stream';
 import { FieldTypeConfig } from '@ngx-formly/core';
 import { findField } from 'src/app/@core/utilities/functions/find-field';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clients-editor-main-info',
@@ -20,7 +21,7 @@ import { findField } from 'src/app/@core/utilities/functions/find-field';
   templateUrl: './clients-editor-main-info.component.html',
   styleUrl: './clients-editor-main-info.component.scss'
 })
-export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
+export class ClientsEditorMainInfoComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.getClientGroupOptions();
     this.getIntroducingLawyerOptions()
@@ -29,6 +30,7 @@ export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
   _apiService = inject(ApiService);
   _unsubscribe = inject(UnsubscribeService);
   _languageService = inject(LanguageService);
+  _router = inject(Router);
   @Input() formly: FormGroup = new FormGroup({});
   @Input() formlyModel: any;
   @Input() options: any;
@@ -40,12 +42,15 @@ export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
 
   }
   getLookupsData() {
-    combineLatest({
+    const endpoints = {
       clientCode: this._apiService.post(API_Config.client.getOrNewClientCode, null),
       introducingLawyer: this._apiService.get(API_Config.general.getLawyerShort),
       clientGroup: this._apiService.get(API_Config.general.getClientGroups, { orderByDirection: 'ASC' }
       ),
-    }).pipe(
+    }
+    const { clientCode, ...remainingEndpoints } = endpoints;
+    const apis = this._router.url.includes('add') ? endpoints : remainingEndpoints;
+    combineLatest(apis).pipe(
       this._unsubscribe.takeUntilDestroy()
     ).subscribe((res) => {
       this.lookupsData = res;
@@ -98,5 +103,5 @@ export class ClientsEditorMainInfoComponent implements OnInit,OnChanges {
 
   }
 
-  
+
 }

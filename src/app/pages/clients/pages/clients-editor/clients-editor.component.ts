@@ -17,6 +17,7 @@ import { ApiService } from 'src/app/@core/api/api.service';
 import { ToastrNotifiService } from 'src/app/@core/services';
 import { objectToFormData } from 'src/app/@core/utilities/functions/objectToFormData';
 import { environment } from 'src/environments/environment';
+import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'app-clients-editor',
@@ -40,7 +41,8 @@ export class ClientsEditorComponent implements OnInit {
   _route = inject(ActivatedRoute);
   _unsubscribe = inject(UnsubscribeService);
   _apiService = inject(ApiService);
-  _toastrNotifiService=inject(ToastrNotifiService)
+  _toastrNotifiService=inject(ToastrNotifiService);
+  _clientService=inject(ClientService)
   isLoading!: boolean;
   formlyModel: any;
   formlyOptions: FormlyFormOptions = {};
@@ -74,6 +76,7 @@ export class ClientsEditorComponent implements OnInit {
       next: (res: ApiRes) => {
         if(res.isSuccess){
           this.formlyModel = res.result;
+          this._clientService.client$.next(this.formlyModel)
           // this.formlyModel.image=res.result?.imagePath?environment.baseUrl+res.result?.imagePath:null;
           // this.formlyModel={...this.formlyModel}
         }

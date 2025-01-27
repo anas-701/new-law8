@@ -10,7 +10,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { ApiService } from 'src/app/@core/api/api.service';
 import { API_Config } from 'src/app/@core/api/api-config/api.config';
 import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
-import { ToastrNotifiService } from 'src/app/@core/services';
+import { LanguageService, ToastrNotifiService } from 'src/app/@core/services';
 import { ApiRes } from 'src/app/@core/models/apiRes-model';
 import { ClientService } from '../../services/client.service';
 
@@ -36,8 +36,10 @@ export class ClientsDetailsComponent implements OnInit {
   _unsubscribeService=inject(UnsubscribeService)
   _toastrNotifiService=inject(ToastrNotifiService)
   _clientService=inject(ClientService)
+  _languageService=inject(LanguageService)
   toggleEdit: boolean = true;
   clientIdentifier: any;
+  client:any;
   url = this._router.url.includes('inactive') ? '/clients/inactive/view' : '/clients/view';
   items: MenuItem[] = [
     { label: 'Details', routerLink: [this._router.url], routerLinkActiveOptions: { exact: true } },
@@ -51,9 +53,20 @@ export class ClientsDetailsComponent implements OnInit {
     this._route.params.subscribe((params: Params) => {
       if (params['id']) {
         this.clientIdentifier = params['id'];
+        this.getData()
       }
 
     });
+  }
+  getData(){
+    this._clientService.client$.pipe(
+      this._unsubscribeService.takeUntilDestroy()
+    ).subscribe({
+      next:(res:any)=>{
+        this.client = res
+        console.log(res)
+      }
+    })
   }
   onEdit() {
     this.toggleEdit = !this.toggleEdit;

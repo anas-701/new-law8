@@ -1,6 +1,11 @@
 <div class="flex justify-between p-2 rounded-t-lg h-14">
     <h1 class="font-sfProDisplay font-bold text-2xl text-colorsTextTextPrimary leading-9">
-        {{_router.url.includes('inactive')?'Inactive Clients':'Clients'|translate}}</h1>
+        <!-- {{_router.url.includes('inactive')?'Inactive Clients':'Clients'|translate}} -->
+        {{ _languageService.getSelectedLanguage() == 'en'
+        ? client.nameEn
+        : client.nameAr
+        }}
+    </h1>
     <div class="flex gap-2">
         <app-shared-button [label]="(_router.url.includes('inactive')?'Activate':'Deactivate')|translate"
             [styleClass]="'border border-grey500 text-grey500 font-sfProDisplay !text-sm !py-1 !font-medium !leading-8 hover:border-primary hover:text-primary'" (onClick)="toggleStatus()" />
