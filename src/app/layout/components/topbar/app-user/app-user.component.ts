@@ -4,6 +4,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ClickOutsideDirective } from '../../../../@shared/directives/click-outside.directive';
 import { SharedModule } from '@shared/shared.module';
+import { AuthService } from 'src/app/@core/services';
 @Component({
   selector: 'app-user',
   templateUrl: './app-user.component.html',
@@ -41,8 +42,8 @@ import { SharedModule } from '@shared/shared.module';
 })
 export class AppUserComponent implements OnInit{
   public isOpen = false;
-
-  public themeMode = ['topBar.light', 'topBar.dark'];
+  _authService=inject(AuthService)
+  // public themeMode = ['topBar.light', 'topBar.dark'];
   ngOnInit(): void {
   }
 

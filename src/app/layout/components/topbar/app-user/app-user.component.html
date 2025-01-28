@@ -20,7 +20,7 @@
         <img src="../../../../../../assets/images/user.png" alt="" class="rounded-full size-8">
         <span>{{'topBar.editMyProfile'| translate}}</span>
       </li>
-      <li routerLink=""
+      <li (click)="_authService.logout()"
         class="inline-flex cursor-pointer font-sfProDisplay items-center gap-4 rounded-md px-4 py-3 text-sm font-medium text-textErrorBase transition-all duration-200 hover:bg-bodyBg hover:text-primaryColor">
         <i class="icon-logout text-2xl"></i>
         <span>{{'topBar.logOut'| translate}}</span>

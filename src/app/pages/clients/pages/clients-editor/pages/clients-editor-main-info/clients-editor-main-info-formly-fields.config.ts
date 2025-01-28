@@ -1,5 +1,6 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ClientsEditorMainInfoComponent } from './clients-editor-main-info.component';
+import { API_Config } from 'src/app/@core/api/api-config/api.config';
 
 export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainInfoComponent): FormlyFieldConfig[] {
     return [
@@ -27,7 +28,7 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     defaultValue:THIS.lookupsData?.clientCode?.result,
                     props: {
                         label: 'Client Code',
-                        disabled: true
+                        disabled: true,
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
@@ -74,6 +75,7 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                         selectedObj:{},
                         optionLabel: 'name',
                         optionValue: 'id',
+                        // endpoint:THIS._apiService.post(API_Config.client.getOrNewClientCode, null),
                         onChange:()=>{
                             THIS.getClientGroupOptions()
                             THIS.setClientGroupValue()
