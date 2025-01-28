@@ -49,7 +49,7 @@ export class ClientsEditorComponent implements OnInit {
   formly: FormGroup = new FormGroup({});
   clientIdentifier: any;
   toggleEditEffect = effect(() => {
-    if (!this._router.url.includes('add')) {
+    if (this._router.url.includes('view')) {
       this.formlyOptions.formState.readonly = this._toggleFormService.getToggleEdit();
     }
   })

@@ -64,7 +64,7 @@ export class ClientsComponent implements OnInit,OnDestroy {
   }
 
   getData() {
-    this.data=clients
+    // this.data=clients
     this.filterOptions = {
       ...this.filterOptions,
       isActive: this._router.url.includes('inactive') ? false : true
@@ -74,7 +74,8 @@ export class ClientsComponent implements OnInit,OnDestroy {
     ).subscribe((res: ApiRes) => {
       this.data = res.result.dataList || [];
       this.totalCount = res.result.totalCount;
-      if (this._router.url.includes('view')) {
+      if (!this._router.url.includes('add')||!this._router.url.includes('update')) {
+        console.log('view')
         this.redirectToFirstClientInList()
       }
     })

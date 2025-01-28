@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, inject, input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
 import { clientsEditorMainInfoFormlyFieldsConfig } from './clients-editor-main-info-formly-fields.config';
