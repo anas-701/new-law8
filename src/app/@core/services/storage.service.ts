@@ -51,7 +51,6 @@ export class StorageService {
   clearStorage(): void {
     // if (!isPlatformBrowser(this.platformId)) return;
     localStorage.clear();
-    console.log('clearStorage',localStorage)
   }
 
   private getStorageKey(key: string): string {

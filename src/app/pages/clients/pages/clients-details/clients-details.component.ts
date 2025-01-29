@@ -13,6 +13,7 @@ import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubsc
 import { LanguageService, ToastrNotifiService } from 'src/app/@core/services';
 import { ApiRes } from 'src/app/@core/models/apiRes-model';
 import { ClientService } from '../../services/client.service';
+import { ConfirmDialogType } from 'src/app/@shared/enums/confirm-dialog-type';
 
 @Component({
   selector: 'app-clients-details',
@@ -73,21 +74,23 @@ export class ClientsDetailsComponent implements OnInit {
     this._toggleFormService.updateToggleEdit(this.toggleEdit);
   }
   toggleStatus() {
+    const title=this._router.url.includes('inactive')?'Activate':'Deactivate'
+    const message=this._router.url.includes('inactive')?'Are you sure you want to activate this client?':'Are you sure you want to deactivate this client?'
     let ref= this._dialogService.open(SharedConfirmDialogComponent, {
       data: {
-        type: 'danger',
-        title: 'Deactivate Client',
-        message: 'Are you sure you want to deactivate this client?',
+        type: this._router.url.includes('inactive')?ConfirmDialogType.Success:ConfirmDialogType.Danger,
+        title: title,
+        message: message,
         btns: [
           {
             label: 'Cancel',
             styleClass: 'border border-grey500 text-grey500',
-            command: () => { }
+            command: () => { ref.close() }      
           },
           {
-            label: 'Deactivate',
-            styleClass: 'bg-textErrorBase text-white',
-            command: () => { this.deactivateClient() }
+            label: this._router.url.includes('inactive')?'Activate':'Deactivate',
+            styleClass: this._router.url.includes('inactive')?'bg-primary text-white':'bg-textErrorBase text-white',
+            command: () => { this.toggleActivation() }
           },
         ]
       }
@@ -100,10 +103,10 @@ export class ClientsDetailsComponent implements OnInit {
       }
     })
   }
-  deactivateClient() {
+  toggleActivation() {
     const params = {
       clientId: this.clientIdentifier,
-      Status: false
+      Status: this._router.url.includes('inactive')?true:false
     }
     this._apiService.post(API_Config.client.activationClient, {}, params).pipe(
       this._unsubscribeService.takeUntilDestroy()
