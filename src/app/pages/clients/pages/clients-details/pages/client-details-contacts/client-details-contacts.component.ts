@@ -25,7 +25,7 @@ export class ClientDetailsContactsComponent {
     {
       label: 'View Details',
       icon: 'icon-show',
-      command: (event:any) => {
+      command: () => {
         this.onOpenContactEditor('view');
       }
     },
@@ -33,7 +33,7 @@ export class ClientDetailsContactsComponent {
     {
       label: 'Edit',
       icon: 'icon-edit',
-      command: (event:any) => {
+      command: () => {
         this.onOpenContactEditor('edit');
       }
     },
@@ -41,9 +41,7 @@ export class ClientDetailsContactsComponent {
     {
       label: 'Delete',
       icon: 'icon-trash',
-      command: (event:any) => {
-        console.log(event.rowData);
-      }
+      command: () => {}
     }
   ];
   contacts = contacts;

@@ -16,8 +16,10 @@ import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubsc
 import { ApiService } from 'src/app/@core/api/api.service';
 import { ToastrNotifiService } from 'src/app/@core/services';
 import { objectToFormData } from 'src/app/@core/utilities/functions/objectToFormData';
-import { environment } from 'src/environments/environment';
 import { ClientService } from '../../services/client.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { SharedConfirmDialogComponent } from 'src/app/@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
+import { ConfirmDialogType } from 'src/app/@shared/enums/confirm-dialog-type';
 
 @Component({
   selector: 'app-clients-editor',
@@ -42,6 +44,7 @@ export class ClientsEditorComponent implements OnInit {
   _unsubscribe = inject(UnsubscribeService);
   _apiService = inject(ApiService);
   _toastrNotifiService=inject(ToastrNotifiService);
+  _dialogService=inject(DialogService); 
   _clientService=inject(ClientService)
   isLoading!: boolean;
   formlyModel: any;
@@ -54,7 +57,6 @@ export class ClientsEditorComponent implements OnInit {
     }
   })
   ngOnInit(): void {
-    console.log('ngOnInit')
     if (!this._router.url.includes('add')) {
       this.getParams()
     }
@@ -63,7 +65,7 @@ export class ClientsEditorComponent implements OnInit {
     this._route.params.pipe(
       this._unsubscribe.takeUntilDestroy()
     ).subscribe((params: Params) => {
-      this.clientIdentifier = params['id'];
+      this.clientIdentifier = params['id']||1;
       this.setFormData();
     })
   }
@@ -115,10 +117,44 @@ export class ClientsEditorComponent implements OnInit {
       .subscribe({
         next: (res: ApiRes) => {
           if(res.isSuccess){
+            
+            if(!this.clientIdentifier){
+              this.onSuccess()
+            }
             this._toastrNotifiService.displaySuccess(res.message)
           }
         },
       });
     this._toggleFormService.updateToggleEdit(true)
+  }
+  onSuccess(){
+    this._dialogService.open(SharedConfirmDialogComponent, {
+      data: {
+        type: ConfirmDialogType.Success,
+        title: 'Client Added Successfully',
+        message: 'Here some Action you can do next',
+        btns: [
+          {
+            label: 'Close',
+            styleClass: 'border border-grey500 text-grey500 !py-2.5 font-medium text-lg',
+            command: () => { }
+          },
+          {
+            label: 'Add Contact',
+            styleClass: 'border border-primary text-primary !py-2.5 font-medium text-lg',
+            command: () => { 
+              this._router.navigate([`/clients/view/${this.clientIdentifier}/contacts`])
+             }
+          },
+          {
+            label: 'Add Matter',
+            styleClass: 'bg-primary text-white !py-2.5 font-medium text-lg',
+            command: () => { 
+              this._router.navigate([`/clients/view/${this.clientIdentifier}/matters`])
+             }
+          },
+        ]
+      }
+    })
   }
 }

@@ -3,7 +3,7 @@ import { SharedEmptySectionComponent } from 'src/app/@shared/components/shared-e
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedSearchComponent } from 'src/app/@shared/components/shared-search/shared-search.component';
-import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { PaginatorModule } from 'primeng/paginator';
 import { ApiService } from 'src/app/@core/api/api.service';
 import { API_Config } from 'src/app/@core/api/api-config/api.config';
@@ -11,9 +11,7 @@ import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubsc
 import { PAGESIZE } from 'src/app/@core/utilities/defines';
 import { ApiRes } from 'src/app/@core/models/apiRes-model';
 import { ToggleFormService } from 'src/app/@shared/modules/formly-config/services/toggle-form.service';
-import { AsyncPipe } from '@angular/common';
 import { ClientService } from './services/client.service';
-import { clients } from './client.fake';
 
 @Component({
   selector: 'app-clients',
@@ -45,7 +43,6 @@ export class ClientsComponent implements OnInit,OnDestroy {
   };
   url: string = '';
   refreshData = effect(() => {
-    console.log(this._clientService.getRefreshData())
     if (this._clientService.getRefreshData()) {
       this.getData()
     }
@@ -64,7 +61,6 @@ export class ClientsComponent implements OnInit,OnDestroy {
   }
 
   getData() {
-    // this.data=clients
     this.filterOptions = {
       ...this.filterOptions,
       isActive: this._router.url.includes('inactive') ? false : true
@@ -75,7 +71,6 @@ export class ClientsComponent implements OnInit,OnDestroy {
       this.data = res.result.dataList || [];
       this.totalCount = res.result.totalCount;
       if (!this._router.url.includes('add')||!this._router.url.includes('update')) {
-        console.log('view')
         this.redirectToFirstClientInList()
       }
     })
@@ -83,8 +78,6 @@ export class ClientsComponent implements OnInit,OnDestroy {
   }
   getQueryParams(){
     this._route.paramMap.pipe(this._unsubscribeService.takeUntilDestroy()).subscribe((params:any) => {
-      // const currentUrl = urlSegments.map((segment:any) => segment.path).join('/');
-      console.log(params)
       this.getData()
     })
   }
@@ -102,7 +95,6 @@ export class ClientsComponent implements OnInit,OnDestroy {
     this.getData();
   }
   redirectToFirstClientInList() {
-    // this._toggleFormService.updateToggleEdit(true)
     this._router.navigate([this.url, this.data[0]?.id])
   }
   ngOnDestroy(): void {
