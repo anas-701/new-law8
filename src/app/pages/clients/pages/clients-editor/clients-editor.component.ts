@@ -119,7 +119,7 @@ export class ClientsEditorComponent implements OnInit {
           if(res.isSuccess){
             
             if(!this.clientIdentifier){
-              this.onSuccess()
+              this.onSuccess(res.result)
             }
             this._toastrNotifiService.displaySuccess(res.message)
           }
@@ -127,7 +127,7 @@ export class ClientsEditorComponent implements OnInit {
       });
     this._toggleFormService.updateToggleEdit(true)
   }
-  onSuccess(){
+  onSuccess(client:any){
     this._dialogService.open(SharedConfirmDialogComponent, {
       data: {
         type: ConfirmDialogType.Success,
@@ -143,14 +143,14 @@ export class ClientsEditorComponent implements OnInit {
             label: 'Add Contact',
             styleClass: 'border border-primary text-primary !py-2.5 font-medium text-lg',
             command: () => { 
-              this._router.navigate([`/clients/view/${this.clientIdentifier}/contacts`])
+              this._router.navigate([`/clients/view/${client.id}/contacts`])
              }
           },
           {
             label: 'Add Matter',
             styleClass: 'bg-primary text-white !py-2.5 font-medium text-lg',
             command: () => { 
-              this._router.navigate([`/clients/view/${this.clientIdentifier}/matters`])
+              this._router.navigate([`/clients/view/${client.id}/matters`])
              }
           },
         ]
