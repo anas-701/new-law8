@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Message } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/@core/services';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
 import { SecondsToTimePipe } from 'src/app/@shared/services/secondsToTime/seconds-to-time.pipe';
+import { SharedModule } from 'src/app/@shared/shared.module';
 
 @Component({
   selector: 'app-forgetpassword-otp',
@@ -17,7 +18,7 @@ import { SecondsToTimePipe } from 'src/app/@shared/services/secondsToTime/second
   imports: [
     FormlyConfigModule,
     SharedButtonComponent,
-    TranslateModule,
+    SharedModule,
     SecondsToTimePipe,
     MessagesModule
   ],
@@ -30,8 +31,10 @@ export class ForgetpasswordOtpComponent
   implements OnInit
 {
   _authService = inject(AuthService);
+  _cdRef=inject(ChangeDetectorRef)
   counterInSeconds!: number;
   messages!: Message[];
+  override isLoading: boolean=true;
   ngOnInit(): void {
     this.initForm();
     if (!this._authService.user) this._router.navigate(['/forget-password']);
@@ -49,9 +52,25 @@ export class ForgetpasswordOtpComponent
       },
     ];
   }
+  resendOtp(){
+    if(!this._authService.user.email) return
+    const model = {
+      "email": this._authService.user.email
+    }
+    this.isLoading=true
+    this._apiService
+    .post(API_Config.auth.resendByEmail, model)
+    .pipe(
+      this._unsubscribe.takeUntilDestroy()
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res.isSuccess) this.countDown()
+        
+      }
+    })
+  }
   countDown() {
-    this.isLoading = true;
-    this.counterInSeconds = 300;
+    this.counterInSeconds =300;
     interval(1000)
       .pipe(take(this.counterInSeconds))
       .subscribe({
@@ -60,6 +79,7 @@ export class ForgetpasswordOtpComponent
         },
         complete: () => {
           this.isLoading = false;
+          this._cdRef.detectChanges()
         },
       });
   }

@@ -10,6 +10,7 @@ import { ApiRes } from 'src/app/@core/models/apiRes-model';
 import { AuthService } from 'src/app/@core/services';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
+import { SharedModule } from 'src/app/@shared/shared.module';
 
 @Component({
   selector: 'app-forgetpassword-email',
@@ -17,9 +18,8 @@ import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly
   imports: [
     FormlyConfigModule,
     SharedButtonComponent,
-    TranslateModule,
-    RouterModule,
-    MessagesModule
+    MessagesModule,
+    SharedModule
   ],
   templateUrl: './forgetpassword-email.component.html',
   styleUrl: './forgetpassword-email.component.scss'
