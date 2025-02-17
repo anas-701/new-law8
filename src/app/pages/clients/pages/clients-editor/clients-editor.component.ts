@@ -43,9 +43,9 @@ export class ClientsEditorComponent implements OnInit {
   _route = inject(ActivatedRoute);
   _unsubscribe = inject(UnsubscribeService);
   _apiService = inject(ApiService);
-  _toastrNotifiService=inject(ToastrNotifiService);
-  _dialogService=inject(DialogService); 
-  _clientService=inject(ClientService)
+  _toastrNotifiService = inject(ToastrNotifiService);
+  _dialogService = inject(DialogService);
+  _clientService = inject(ClientService)
   isLoading!: boolean;
   formlyModel: any;
   formlyOptions: FormlyFormOptions = {};
@@ -65,7 +65,7 @@ export class ClientsEditorComponent implements OnInit {
     this._route.params.pipe(
       this._unsubscribe.takeUntilDestroy()
     ).subscribe((params: Params) => {
-      this.clientIdentifier = params['id']||1;
+      this.clientIdentifier = params['id'] || 1;
       this.setFormData();
     })
   }
@@ -76,7 +76,7 @@ export class ClientsEditorComponent implements OnInit {
       this._unsubscribe.takeUntilDestroy()
     ).subscribe({
       next: (res: ApiRes) => {
-        if(res.isSuccess){
+        if (res.isSuccess) {
           this.formlyModel = res.result;
           this._clientService.client$.next(this.formlyModel)
           // this.formlyModel.image=res.result?.imagePath?environment.baseUrl+res.result?.imagePath:null;
@@ -103,11 +103,11 @@ export class ClientsEditorComponent implements OnInit {
         ? this.formly.value?.mobile2?.internationalNumber
         : this.formly.value.mobile2,
     };
-    const body = this.clientIdentifier?{...payload,id:this.clientIdentifier}:payload
+    const body = this.clientIdentifier ? { ...payload, id: this.clientIdentifier } : payload
     const path = this.clientIdentifier
       ? API_Config.client.update
       : API_Config.client.create;
-      
+
     this._apiService
       .post(path, objectToFormData(body))
       .pipe(
@@ -116,9 +116,9 @@ export class ClientsEditorComponent implements OnInit {
       )
       .subscribe({
         next: (res: ApiRes) => {
-          if(res.isSuccess){
-            
-            if(!this.clientIdentifier){
+          if (res.isSuccess) {
+
+            if (!this.clientIdentifier) {
               this.onSuccess(res.result)
             }
             this._toastrNotifiService.displaySuccess(res.message)
@@ -127,8 +127,8 @@ export class ClientsEditorComponent implements OnInit {
       });
     this._toggleFormService.updateToggleEdit(true)
   }
-  onSuccess(client:any){
-    this._dialogService.open(SharedConfirmDialogComponent, {
+  onSuccess(client: any) {
+    const ref = this._dialogService.open(SharedConfirmDialogComponent, {
       data: {
         type: ConfirmDialogType.Success,
         title: 'Client Added Successfully',
@@ -137,21 +137,23 @@ export class ClientsEditorComponent implements OnInit {
           {
             label: 'Close',
             styleClass: 'border border-grey500 text-grey500 !py-2.5 font-medium text-lg',
-            command: () => { }
+            command: () => {
+              ref.close()
+            }
           },
           {
             label: 'Add Contact',
             styleClass: 'border border-primary text-primary !py-2.5 font-medium text-lg',
-            command: () => { 
+            command: () => {
               this._router.navigate([`/clients/view/${client.id}/contacts`])
-             }
+            }
           },
           {
             label: 'Add Matter',
             styleClass: 'bg-primary text-white !py-2.5 font-medium text-lg',
-            command: () => { 
+            command: () => {
               this._router.navigate([`/clients/view/${client.id}/matters`])
-             }
+            }
           },
         ]
       }

@@ -7,7 +7,7 @@
   <p class="text-textTertairy text-lg	mb-10">{{_dynamicDialogConfig.data.message}}</p>
   <div class="flex justify-between gap-4">
     @for (btn of _dynamicDialogConfig.data.btns; track btn) {
-      <app-shared-button [label]="btn.label" [styleClass]="btn.styleClass"  (onClick)="btn.command();_dynamicDialogRef.close(true)"/>
+      <app-shared-button [label]="btn.label" [styleClass]="btn.styleClass"  (onClick)="btn.command();"/>
     }
   </div>
 

@@ -11,7 +11,7 @@
     <div class="flex gap-4">
         <img src="assets/images/icons/contact.svg" alt="contact" class="w-14 h-14">
         <div>
-            <p class="font-poppins font-bold text-md text-textSecondary">{{contact.name}}</p>
+            <p class="font-poppins font-bold text-md text-textSecondary">{{contact.fullName}}</p>
             <p class="font-poppins font-medium text-xs text-grey500">{{contact.position}}</p>
         </div>
     </div>
@@ -21,7 +21,7 @@
     </div>
     <div>
         <p class="font-poppins font-bold text-md text-textSecondary">{{contact.email}}</p>
-        <p class="font-poppins font-medium text-xs text-grey500 truncate max-w-64">{{contact.remark}}</p>
+        <p class="font-poppins font-medium text-xs text-grey500 truncate max-w-64">{{contact.remarks}}</p>
     </div>
     <div class="self-center">
         <p-menu #menu [model]="menuItems" [popup]="true" />

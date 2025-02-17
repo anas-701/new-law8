@@ -76,7 +76,7 @@ export function clientDetailsContactEditorFormlyConfig():FormlyFieldConfig[]{
                     },
                 },
                 {
-                    key: 'remark',
+                    key: 'remarks',
                     type: 'input',
                     props: {
                         label: 'Remark'

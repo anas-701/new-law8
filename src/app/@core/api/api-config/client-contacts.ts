@@ -1,10 +1,10 @@
 export const Clients_Contact_API = {
     clientsContact: {
-      get: 'Law_ClientContact/GetList',
-      update: 'Law_ClientContact/Update',
-      create: 'Law_ClientContact/Create',
-      getById: 'Law_ClientContact/GetById',
-      delete: 'Law_ClientContact/Delete',
+      get: 'Law_ClientContactV2/GetList',
+      update: 'Law_ClientContactV2/Update',
+      create: 'Law_ClientContactV2/Create',
+      getById: 'Law_ClientContactV2/GetById',
+      delete: 'Law_ClientContactV2/Delete',
     },
   };
   

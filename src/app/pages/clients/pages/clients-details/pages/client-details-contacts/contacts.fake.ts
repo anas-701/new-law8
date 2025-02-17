@@ -8,7 +8,7 @@ export const contacts = [
         phone: '97128282',
         mobile: '97128282',
         position: 'Lawyer',
-        remark: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+        remarks: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ export const contacts = [
         phone: '97128282',
         mobile: '97128282',
         position: 'Lawyer',
-        remark: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+        remarks: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
     },
     {
         id: 3,
@@ -30,6 +30,6 @@ export const contacts = [
         phone: '97128282',
         mobile: '97128282',
         position: 'Lawyer',
-        remark: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+        remarks: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
     },
 ]

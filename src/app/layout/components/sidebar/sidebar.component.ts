@@ -51,6 +51,6 @@ export class SidebarComponent implements OnInit{
   }
 
   isActive(route: string): boolean {
-    return this.currentUrl===route;
+    return this.currentUrl.includes(route);
   }
 }
