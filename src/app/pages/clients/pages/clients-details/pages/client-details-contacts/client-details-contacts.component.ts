@@ -1,9 +1,8 @@
-import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { SharedModule } from 'src/app/@shared/shared.module';
 import { MenuModule } from 'primeng/menu';
 import { ApiService } from 'src/app/@core/api/api.service';
-import { contacts } from './contacts.fake';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ClientDetailsContactsEditorComponent } from './client-details-contacts-editor/client-details-contacts-editor.component';
@@ -80,7 +79,6 @@ export class ClientDetailsContactsComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    // this.contacts=  contacts;
     if (!this.clientId) return
     const params = { clientId: this.clientId, orderByDirection: 'ASC' }
     this._apiService.get(API_Config.clientsContact.get, params).pipe(

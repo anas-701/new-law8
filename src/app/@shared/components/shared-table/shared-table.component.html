@@ -1,0 +1,70 @@
+<p-table [columns]="columns" [value]="data" [styleClass]="'p-datatable-sm w-full'">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            @for (col of columns; track $index) {
+            <th [pSortableColumn]="col.field" class="px-4">
+                <div class="flex justify-between">
+                    {{ col.header }}
+                    <p-sortIcon [field]="col.field" />
+                </div>
+            </th>
+            }
+            @if(columnActionsTemplateRef){
+            <!-- ANCHOR Actions Column -->
+            <th class="px-4">
+                {{ "common.actions" | translate }}
+            </th>
+            }
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-rowIndex let-columns="columns">
+        <tr>
+            @for (col of columns; track $index) {
+            <td class="px-4">
+                @if(
+                !col.isCustom &&
+                !col.field2
+                ){
+                <p class="text-sm text-textTertairy">{{rowData[col.field]}}</p>
+                }
+                @if(col.field2){
+                <p class="text-sm text-textTertairy">{{rowData[col.field]}}</p>
+                <p class="text-grey500 font-medium text-xs">{{rowData[col.field2]}}</p>
+                }
+
+                @if(col.isCustom){
+                @if(customColumnTemplateRef){
+
+                <ng-container [ngTemplateOutlet]="customColumnTemplateRef" [ngTemplateOutletContext]="{
+                                        $implicit: rowData,
+                                        rowIndex: rowIndex,
+                                        field: col.field
+                                        }">
+                </ng-container>
+                }
+                }
+
+
+
+            </td>
+            }
+            @if(columnActionsTemplateRef){
+            <td>
+
+                <ng-container [ngTemplateOutlet]="columnActionsTemplateRef" [ngTemplateOutletContext]="{
+                                    $implicit: rowData,
+                                    rowIndex: rowIndex
+                                    }">
+                </ng-container>
+            </td>
+            }
+        </tr>
+    </ng-template>
+</p-table>
+@if (withPagination) {
+<p-paginator styleClass="py-6" (onPageChange)="pageChanged($event)" [rows]="pagination?.pageSize"
+    [totalRecords]="pagination?.totalElements||data?.length" [rowsPerPageOptions]="PAGE_SIZE_OPTION" [showCurrentPageReport]="true"
+    [currentPageReportTemplate]="currentPageReportTemplate" [first]="first" dropdownAppendTo="body"
+    [pageLinkSize]="5" />
+}

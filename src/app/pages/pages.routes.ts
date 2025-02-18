@@ -16,8 +16,8 @@ export const PAGES_ROUTES: Routes = [
         loadChildren: () => import('./clients/clients.routes').then(m => m.clientsRoutes)
     },
     {
-        path: '',
-        redirectTo: 'clients',
-        pathMatch: 'full'
-    }
+        path: 'matters',	
+        loadComponent: () => import('./matters/matters.component').then(m => m.MattersComponent),
+        loadChildren: () => import('./matters/matters.route').then(m => m.mattersRoutes)
+    },
 ];

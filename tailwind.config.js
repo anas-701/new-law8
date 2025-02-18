@@ -89,6 +89,13 @@ module.exports = {
         blue600:'var(--blue-600)',
         textSecondaryHover:'var(--text-secondary-hover)',
         colorsTextTextPrimary:'var(--colors-text-text-primary-900)',
+        success50:'var(--success-50)',
+        success600:'var(--success-600)',
+        alert50:'var(--alert-50)',
+        alert600:'var(--alert-600)',
+        error50:'var(--error-50)',
+        greyscale600:'var(--greyscale-600)',
+        surfaceLevel2:'var(--surface-level-2)',
       },
       screens: {
         xs: "344px",

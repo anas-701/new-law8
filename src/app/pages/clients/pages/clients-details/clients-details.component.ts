@@ -41,36 +41,27 @@ export class ClientsDetailsComponent implements OnInit {
   toggleEdit: boolean = true;
   clientIdentifier: any;
   client: any;
-  activeItem?: MenuItem;
-  url = this._router.url.includes('inactive')
-    ? '/clients/inactive/view'
-    : '/clients/view';
   items: MenuItem[] = [
     {
       label: 'Details',
-      // routerLink: [this._router.url],
-      // routerLinkActiveOptions: { exact: true },
       command:()=>{
         this._router.navigate(['./'],{relativeTo:this._route})
       }
     },
     {
       label: 'Contacts',
-      // routerLink: ['/contacts', { relativeTo: this._route }],
-      // routerLinkActiveOptions: { exact: true },
       command:()=>{
         this._router.navigate(['./contacts'],{relativeTo:this._route})
       }
     },
     {
       label: 'Matters',
-      // routerLink: ['/matters', { relativeTo: this._route }],
-      // routerLinkActiveOptions: { exact: true },
       command:()=>{
         this._router.navigate(['./matters'],{relativeTo:this._route})
       }
     },
   ];
+  activeItem?: MenuItem;
   ngOnInit(): void {
     this.getParams();
   }
@@ -83,9 +74,7 @@ export class ClientsDetailsComponent implements OnInit {
     });
     this._router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        console.log('Route changed:', event.url);
         this.activeItem=this.items.find(obj=>event.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0]
-        console.log('activeItem',this.activeItem)
       }
     });
   }

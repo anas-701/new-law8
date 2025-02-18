@@ -1,0 +1,15 @@
+<section>
+    <div class="flex justify-between items-center">
+        <h1 class="text-colorsTextTextPrimary font-bold text-2xl">{{'Matters'|translate}}</h1>
+        <app-shared-button [label]="'New Matter' | translate" [styleClass]="
+          'flex bg-primary text-white !text-sm !py-1 !px-8 !font-medium !leading-8'
+        " [routerLink]="['/clients/add']" />
+    </div>
+    <div class="my-2 bg-white py-6 rounded-2xl">
+        <div class="px-6">
+            <p-tabMenu [model]="items" [activeItem]="activeItem"/>
+        </div>
+        <router-outlet/>
+    </div>
+
+</section>
