@@ -1,21 +1,21 @@
 export const Matter_Columns = [
     {
-        field:'desc',
+        field:'descr',
         header:'Matter',
         isCustom:true
     },
     {
-        field:'practiceArea',
-        field2:'reference',
+        field:'law_PractsArea',
+        field2:'courtNumber',
         header:'Practice Area',
     },
     {
-        field:'category',
-        field2:'categoryDescription',
+        field:'law_MtrCat',
+        field2:'mtrType',
         header:'Category',
     },
     {
-        field:'client',
+        field:'law_Client',
         header:'Client',
     },
 ]

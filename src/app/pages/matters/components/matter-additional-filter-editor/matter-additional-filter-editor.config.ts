@@ -1,16 +1,17 @@
 import { FormlyFieldConfig } from "@ngx-formly/core";
+import { MatterAdditionalFilterEditorComponent } from "./matter-additional-filter-editor.component";
 
-export function matterAdditionalFilterFields():FormlyFieldConfig[]{
+export function matterAdditionalFilterFields(THIS:MatterAdditionalFilterEditorComponent):FormlyFieldConfig[]{
     return [
         {
             fieldGroupClassName:'grid md:grid-cols-2 gap-4',
             fieldGroup:[
                 {
                     type:'select',
-                    key:'client',
+                    key:'clientId',
                     props:{
                         label:'Client',
-                        optionsArr:['client 1','client 2'].map(val=>({label:val,value:val}))
+                        optionsArr:THIS.lookupsData.clients.result.map((obj:any)=>({label:obj.name,value:obj}))
                     }
                 },
                 {

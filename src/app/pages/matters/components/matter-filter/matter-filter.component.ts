@@ -42,6 +42,7 @@ export class MatterFilterComponent implements OnInit {
               placeholder: 'Search',
               icon: 'icon-search text-grey400',
               input: () => {
+                this.formlyModel={...this.formly.value}
                 this.onFilter.emit(this.formlyModel)
               }
             }
@@ -62,9 +63,11 @@ export class MatterFilterComponent implements OnInit {
                 ref.onClose.subscribe({
                   next: (res) => {
                     if (res) {
-                      this.formlyModel = { ...this.formlyModel, ...res }
+                      this.formlyModel = { ...this.formly.value, ...res }
+                      console.log('this.formlyModel',this.formlyModel)
                       const keysWithValues = Object.values(res).filter(value => value !== undefined && value!==null)
                       this.additionalFilterValues = keysWithValues;
+                      this.onFilter.emit(this.formlyModel)
                     }
                   }
                 })

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChild, EventEmitter, inject, Input, Output, TemplateRef } from '@angular/core';
+import { Component, ContentChild, EventEmitter, inject, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { SharedModule } from '../../shared.module';
 import { PaginatorModule } from 'primeng/paginator';
@@ -18,20 +18,28 @@ import { PAGE_SIZE_OPTION, PAGESIZE } from 'src/app/@core/utilities/defines';
   templateUrl: './shared-table.component.html',
   styleUrl: './shared-table.component.scss'
 })
-export class SharedTableComponent {
+export class SharedTableComponent implements OnChanges{
+
 
   _languageService = inject(LanguageService)
   @Input() withPagination: boolean = true
   @Input() data: any
   @Input() columns: any[] = [];
+  @Input() pagination: any={ pagSize: PAGESIZE, pageNum: 1, totalElements: 0,orderByDirection: 'ASC', };
   @Output() onPageChange = new EventEmitter()
   @ContentChild('columnActions', { static: false })
   columnActionsTemplateRef?: TemplateRef<any>;
 
   @ContentChild('customColumn', { static: false })
   customColumnTemplateRef?: TemplateRef<any>;
-
-  pagination: any={ pageSize: PAGESIZE, page: 1, totalElements: 0 };
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['pagination'].currentValue) this.getTableMessages()
+  }
+  getTableMessages(): void {
+    
+    this.currentPageReportTemplate = `${this._languageService.getTransValue('messages.dataMessage')} ${this.pagination.totalElements ? this.pagination.totalElements : 0}`;
+  }
+  
   first: number = 0;
   currentPageReportTemplate: string = this._languageService.getTransValue('messages.dataMessage');
   PAGE_SIZE_OPTION = PAGE_SIZE_OPTION;

@@ -2,7 +2,7 @@
     <ng-template pTemplate="header" let-columns>
         <tr>
             @for (col of columns; track $index) {
-            <th [pSortableColumn]="col.field" class="px-4">
+            <th [pSortableColumn]="col.field" class="px-4 max-w-fit">
                 <div class="flex justify-between">
                     {{ col.header }}
                     <p-sortIcon [field]="col.field" />
@@ -63,8 +63,8 @@
     </ng-template>
 </p-table>
 @if (withPagination) {
-<p-paginator styleClass="py-6" (onPageChange)="pageChanged($event)" [rows]="pagination?.pageSize"
-    [totalRecords]="pagination?.totalElements||data?.length" [rowsPerPageOptions]="PAGE_SIZE_OPTION" [showCurrentPageReport]="true"
+<p-paginator styleClass="py-6" (onPageChange)="pageChanged($event)" [rows]="pagination?.pagSize"
+    [totalRecords]="pagination?.totalElements" [rowsPerPageOptions]="PAGE_SIZE_OPTION" [showCurrentPageReport]="true"
     [currentPageReportTemplate]="currentPageReportTemplate" [first]="first" dropdownAppendTo="body"
     [pageLinkSize]="5" />
 }

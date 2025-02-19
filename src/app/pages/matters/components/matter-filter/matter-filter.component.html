@@ -7,7 +7,7 @@
         <div class="flex gap-2">
             <span class="text-sm text-greyscale600 font-medium me-4 self-center">Applied filters:</span>
             @for (item of additionalFilterValues; track $index) {
-                <p-chip [label]="item" [removable]="true" (onRemove)="updateFilter(item)"/>
+                <p-chip [label]="item.name" [removable]="true" (onRemove)="updateFilter(item)"/>
             }
         </div>
         <div>

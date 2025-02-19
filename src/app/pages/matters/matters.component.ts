@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
@@ -16,7 +16,8 @@ import { SharedModule } from 'src/app/@shared/shared.module';
   templateUrl: './matters.component.html',
   styleUrl: './matters.component.scss'
 })
-export class MattersComponent {
+export class MattersComponent implements OnInit {
+
   _router = inject(Router)
   _route = inject(ActivatedRoute)
   items: MenuItem[] = [
@@ -33,5 +34,20 @@ export class MattersComponent {
       }
     },
   ];
-  activeItem: MenuItem =this.items[0];
+  activeItem!: MenuItem ;
+  ngOnInit(): void {
+    this.activeItem=this.items.find(obj=>this._router.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0];
+    console.log('this.activeItem',this.activeItem)
+    this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeItem=this.items.find(obj=>event.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0]
+      }
+    });
+    // this._router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.activeItem = this.items.find(obj => event.url.includes(obj?.label?.toLocaleLowerCase() || '')) || this.items[0];
+    //     console.log('activeItem',this.activeItem)
+    //   }
+    // });
+  }
 }
