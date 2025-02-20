@@ -1,7 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Matter_Columns } from './matters-columns.config';
 import { SharedTableComponent } from 'src/app/@shared/components/shared-table/shared-table.component';
-import { matters } from './matter.fake';
 import { SharedStatusComponent } from 'src/app/@shared/components/shared-status/shared-status.component';
 import { matter_statusConfig } from './matter-status.config';
 import { TooltipModule } from 'primeng/tooltip';
@@ -28,7 +27,8 @@ import { Router } from '@angular/router';
   templateUrl: './matters-list.component.html',
   styleUrl: './matters-list.component.scss'
 })
-export class MattersListComponent implements OnInit{
+export class MattersListComponent implements OnInit,OnDestroy{
+
  
   isLoading:boolean =true;
   private _apiService=inject(ApiService)
@@ -118,5 +118,7 @@ export class MattersListComponent implements OnInit{
       }
     });
   }
-
+  ngOnDestroy(): void {
+    this._unsubscribeService.destroy()
+  }
 }

@@ -1,0 +1,20 @@
+<section>
+    <div class="flex justify-between">
+        <div>
+            <h1 class="text-colorsTextTextPrimary font-bold text-2xl mb-1">{{data.title}}</h1>
+            <p-breadcrumb class="max-w-full" [model]="items" />
+        </div>
+        <div class="flex gap-2 self-center">
+            <app-shared-button [label]="'Deactivate'|translate"
+                [styleClass]="'border border-grey500 text-grey500 !text-sm !py-1 !font-medium !leading-8 hover:border-primary hover:text-primary'" />
+            <app-shared-button [label]="'Edit'|translate"
+                [styleClass]="'bg-primary text-white !text-sm !py-1 !font-medium !leading-8'" />
+        </div>
+    </div>
+    <div class="bg-white rounded-2xl my-4">
+        <div class="px-6">
+            <p-tabMenu [model]="tabs" [activeItem]="activeItem"/>
+        </div>
+    </div>
+    <router-outlet/>
+</section>

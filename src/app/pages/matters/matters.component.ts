@@ -37,12 +37,12 @@ export class MattersComponent implements OnInit {
   activeItem!: MenuItem ;
   ngOnInit(): void {
     this.activeItem=this.items.find(obj=>this._router.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0];
-    console.log('this.activeItem',this.activeItem)
-    this._router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.activeItem=this.items.find(obj=>event.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0]
-      }
-    });
+    // console.log('this.activeItem',this.activeItem)
+    // this._router.events.subscribe((event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.activeItem=this.items.find(obj=>event.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0]
+    //   }
+    // });
     // this._router.events.subscribe((event) => {
     //   if (event instanceof NavigationEnd) {
     //     this.activeItem = this.items.find(obj => event.url.includes(obj?.label?.toLocaleLowerCase() || '')) || this.items[0];
