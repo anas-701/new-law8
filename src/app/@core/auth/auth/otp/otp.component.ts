@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Message } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -30,8 +30,11 @@ import { SharedModule } from 'src/app/@shared/shared.module';
 })
 export class OtpComponent extends FormBaseClass implements OnInit {
   _authService = inject(AuthService);
+  _cdRef=inject(ChangeDetectorRef)
   counterInSeconds!: number;
   messages!: Message[];
+  override isLoading: boolean=true;
+
   ngOnInit(): void {
     this.initForm();
     this.countDown();
@@ -98,9 +101,25 @@ export class OtpComponent extends FormBaseClass implements OnInit {
         },
       });
   }
-  countDown() {
+  resendOtp(){
+    if(!this._authService.user.userName) return
+    const model = {
+      "userName": this._authService.user.userName
+    }
     this.isLoading = true;
-    this.counterInSeconds = 300;
+    this._apiService
+    .post(API_Config.auth.resendByUserName, model)
+    .pipe(
+      this._unsubscribe.takeUntilDestroy()
+    ).subscribe({
+      next:(res:ApiRes)=>{
+        if(res.isSuccess) this.countDown()
+        
+      }
+    })
+  }
+  countDown() {
+    this.counterInSeconds =300;
     interval(1000).pipe(
       take(this.counterInSeconds)
     ).subscribe({
@@ -109,8 +128,10 @@ export class OtpComponent extends FormBaseClass implements OnInit {
       },
       complete: () => {
         this.isLoading = false;
+        this._cdRef.detectChanges()
       }
     });
+    
   }
 
 }

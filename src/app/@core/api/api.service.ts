@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
 
-  apiUrlPrefix = `${environment.baseUrl}api/`
+  apiUrlPrefix = `${environment.baseUrl}/api/`
 
   constructor(private http: HttpClient) { }
 

@@ -3,10 +3,10 @@
   (click)="click($event)"
   [disabled]="disabled||isLoading()"
   [ngClass]="styleClass"
-  class="btn px-8 py-3.5 text-lg w-full rounded-md font-sfProDisplay font-bold"
+  class="btn px-8 py-3.5 text-lg w-full rounded-md font-bold"
 >
 @if(icon && !isLoading()){
-    <i [ngClass]="icon" class="me-2 text-xs font-medium"></i>
+    <i [ngClass]="icon" class="text-xs font-medium" [class]="label?'me-2':''"></i>
   }
   @if(isLoading()){
   <svg aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101"
@@ -20,7 +20,8 @@
   </svg>
   Loading...
   }@else {
-  {{ label }}
+    {{ label }}
+ 
   }
 
 </button>

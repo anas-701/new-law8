@@ -42,14 +42,14 @@ export class StorageService {
   }
 
   removeItemStorage(key: string): void {
-    if (!isPlatformBrowser(this.platformId)) return;
+    // if (!isPlatformBrowser(this.platformId)) return;
 
     const storageKey = this.getStorageKey(key);
     localStorage.removeItem(storageKey);
   }
 
   clearStorage(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
+    // if (!isPlatformBrowser(this.platformId)) return;
     localStorage.clear();
   }
 

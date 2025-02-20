@@ -9,7 +9,7 @@
           [formlyAttributes]="field"
           [formControl]="formControl"
           [showClear]="props['showClear'] || true"
-          [options]="props['optionsArr']"
+          [options]="optionsArr?.length?optionsArr: props['optionsArr']"
           [showClear]="props['showClear'] || true"
           [filter]="props['showFilter'] ?? true"
           [placeholder]="props['placeholder']"

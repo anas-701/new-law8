@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Params, Router, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { TabMenuModule } from 'primeng/tabmenu';
@@ -7,6 +7,14 @@ import { MenuItem } from 'primeng/api';
 import { ToggleFormService } from 'src/app/@shared/modules/formly-config/services/toggle-form.service';
 import { SharedConfirmDialogComponent } from 'src/app/@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ApiService } from 'src/app/@core/api/api.service';
+import { API_Config } from 'src/app/@core/api/api-config/api.config';
+import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
+import { LanguageService, ToastrNotifiService } from 'src/app/@core/services';
+import { ApiRes } from 'src/app/@core/models/apiRes-model';
+import { ClientService } from '../../services/client.service';
+import { ConfirmDialogType } from 'src/app/@shared/enums/confirm-dialog-type';
+import { relative } from 'path';
 
 @Component({
   selector: 'app-clients-details',
@@ -15,37 +23,131 @@ import { DialogService } from 'primeng/dynamicdialog';
     SharedButtonComponent,
     TranslateModule,
     RouterOutlet,
-    TabMenuModule
+    TabMenuModule,
   ],
   templateUrl: './clients-details.component.html',
-  styleUrl: './clients-details.component.scss'
+  styleUrl: './clients-details.component.scss',
 })
-export class ClientsDetailsComponent {
+export class ClientsDetailsComponent implements OnInit {
   _toggleFormService = inject(ToggleFormService);
   _router = inject(Router);
+  _route = inject(ActivatedRoute);
   _dialogService = inject(DialogService);
+  _apiService = inject(ApiService);
+  _unsubscribeService = inject(UnsubscribeService);
+  _toastrNotifiService = inject(ToastrNotifiService);
+  _clientService = inject(ClientService);
+  _languageService = inject(LanguageService);
   toggleEdit: boolean = true;
-  url = this._router.url.includes('inactive') ? '/clients/inactive/view/1' : '/clients/view/1';
+  clientIdentifier: any;
+  client: any;
   items: MenuItem[] = [
-    { label: 'Details', routerLink: [this.url], routerLinkActiveOptions: { exact: true } },
-    { label: 'Contacts', routerLink: [this.url + '/contacts'], routerLinkActiveOptions: { exact: true } },
-    { label: 'Matters', routerLink: [this.url + '/matters'], routerLinkActiveOptions: { exact: true } }
+    {
+      label: 'Details',
+      command:()=>{
+        this._router.navigate(['./'],{relativeTo:this._route})
+      }
+    },
+    {
+      label: 'Contacts',
+      command:()=>{
+        this._router.navigate(['./contacts'],{relativeTo:this._route})
+      }
+    },
+    {
+      label: 'Matters',
+      command:()=>{
+        this._router.navigate(['./matters'],{relativeTo:this._route})
+      }
+    },
   ];
+  activeItem?: MenuItem;
+  ngOnInit(): void {
+    this.getParams();
+  }
+  getParams() {
+    this._route.params.subscribe((params: Params) => {
+      if (params['id']) {
+        this.clientIdentifier = params['id'];
+        this.getData();
+      }
+    });
+    this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeItem=this.items.find(obj=>event.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.items[0]
+      }
+    });
+  }
+  getData() {
+    this._clientService.client$
+      .pipe(this._unsubscribeService.takeUntilDestroy())
+      .subscribe({
+        next: (res: any) => {
+          this.client = res;
+          console.log(res);
+        },
+      });
+  }
   onEdit() {
     this.toggleEdit = !this.toggleEdit;
     this._toggleFormService.updateToggleEdit(this.toggleEdit);
   }
   toggleStatus() {
-    this._dialogService.open(SharedConfirmDialogComponent, {
+    const title = this._router.url.includes('inactive')
+      ? 'Activate'
+      : 'Deactivate';
+    const message = this._router.url.includes('inactive')
+      ? 'Are you sure you want to activate this client?'
+      : 'Are you sure you want to deactivate this client?';
+    let ref = this._dialogService.open(SharedConfirmDialogComponent, {
       data: {
-        type: 'danger',
-        title: 'Deactivate Client',
-        message: 'Are you sure you want to deactivate this client?',
+        type: this._router.url.includes('inactive')
+          ? ConfirmDialogType.Success
+          : ConfirmDialogType.Danger,
+        title: title,
+        message: message,
         btns: [
-          { label: 'Cancel', styleClass: 'border border-grey500 text-grey500', command: () => { } },
-          { label: 'Deactivate', styleClass: 'bg-textErrorBase text-white', command: () => { } },
-        ]
-      }
-    })
+          {
+            label: 'Cancel',
+            styleClass: 'border border-grey500 text-grey500',
+            command: () => {
+              ref.close();
+            },
+          },
+          {
+            label: this._router.url.includes('inactive')
+              ? 'Activate'
+              : 'Deactivate',
+            styleClass: this._router.url.includes('inactive')
+              ? 'bg-primary text-white'
+              : 'bg-textErrorBase text-white',
+            command: () => {
+              this.toggleActivation();
+            },
+          },
+        ],
+      },
+    });
+    ref.onClose.subscribe({
+      next: (res) => {
+        if (res) {
+          this._clientService.refreshData$.next(true);
+        }
+      },
+    });
+  }
+  toggleActivation() {
+    const params = {
+      clientId: this.clientIdentifier,
+      Status: this._router.url.includes('inactive') ? true : false,
+    };
+    this._apiService
+      .post(API_Config.client.activationClient, {}, params)
+      .pipe(this._unsubscribeService.takeUntilDestroy())
+      .subscribe((res: ApiRes) => {
+        if (res.isSuccess) {
+          this._toastrNotifiService.displaySuccess(res.message);
+        }
+      });
   }
 }

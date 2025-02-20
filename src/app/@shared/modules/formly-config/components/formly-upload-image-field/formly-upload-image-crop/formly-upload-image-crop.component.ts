@@ -6,6 +6,8 @@ import { ImageCroppedEvent, ImageCropperComponent, ImageTransform } from 'ngx-im
 import { SharedButtonComponent } from 'src/app/@shared/components/shared-button/shared-button.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { SliderModule } from 'primeng/slider';
+
 @Component({
   selector: 'app-formly-upload-image-crop',
   standalone: true,
@@ -13,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     ImageCropperComponent,
     SharedButtonComponent,
     TranslateModule,
-    FormsModule
+    FormsModule,
+    SliderModule
   ],
   templateUrl: './formly-upload-image-crop.component.html',
   styleUrl: './formly-upload-image-crop.component.scss'
@@ -21,18 +24,20 @@ import { FormsModule } from '@angular/forms';
 export class FormlyUploadImageCropComponent {
   imageChangedEvent: Event | null = null;
   croppedImage: any;
-  croppedFile:any;
-  croppedBase64:any;
-  fileName!:string
-  dynamicDialogConfig=inject(DynamicDialogConfig)
-  dynamicDialogRef=inject(DynamicDialogRef);
-  constructor( private sanitizer: DomSanitizer){}
+  croppedFile: any;
+  croppedBase64: any;
+  croppedBlob: any;
+  fileName!: string
+  dynamicDialogConfig = inject(DynamicDialogConfig)
+  dynamicDialogRef = inject(DynamicDialogRef);
+  scale: number = 1; // التكبير الافتراضي
+  transform: ImageTransform = {};
+  constructor(private sanitizer: DomSanitizer) { }
   ngOnInit(): void {
-    console.log(this.dynamicDialogConfig.data)
-    this.fileName=this.dynamicDialogConfig.data.name
+    this.fileName = this.dynamicDialogConfig.data.name
     this.convertFileToInputEvent(this.dynamicDialogConfig.data)
   }
-  convertFileToInputEvent(file:File){
+  convertFileToInputEvent(file: File) {
     const dataTransfer = new DataTransfer();
     dataTransfer.items.add(file)
 
@@ -49,22 +54,21 @@ export class FormlyUploadImageCropComponent {
         files: dataTransfer.files,
       },
     });
-    this.imageChangedEvent=inputEvent
+    this.imageChangedEvent = inputEvent
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    console.log(event);
-    this.croppedBase64=event.base64
-  
+    this.croppedBase64 = event.base64
+    this.croppedBlob = event.objectUrl
+
     this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl || event.base64 || '');
     // event.blob can be used to upload the cropped image
   }
-  scale: number = 1; // التكبير الافتراضي
-  transform: ImageTransform = {};
+
   onScaleChange(): void {
     this.transform = {
       ...this.transform,
       scale: this.scale
-    };
-  } 
+    };
+  }
 }

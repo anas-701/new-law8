@@ -1,5 +1,6 @@
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { ClientsEditorMainInfoComponent } from './clients-editor-main-info.component';
+import { API_Config } from 'src/app/@core/api/api-config/api.config';
 
 export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainInfoComponent): FormlyFieldConfig[] {
     return [
@@ -7,7 +8,7 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
             fieldGroupClassName: 'grid grid-cols-6 gap-4',
             fieldGroup: [
                 {
-                    key: 'clientImage',
+                    key: 'image',
                     type: 'upload-image',
                     className: 'col-span-6',
                     props: {
@@ -16,16 +17,18 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
+                        'hide': ()=>THIS._router.url.includes('view'),
                     },
+
                 },
                 {
                     key: 'clientCode',
                     type: 'input',
                     className: 'md:col-span-2',
+                    defaultValue:THIS.lookupsData?.clientCode?.result,
                     props: {
                         label: 'Client Code',
                         disabled: true,
-                        value: THIS.lookupsData.clientCode
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
@@ -50,10 +53,12 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     key: THIS._languageService.getSelectedLanguage() == 'en'
                     ? 'nameAr'
                     : 'nameEn',
-                    type: 'input',
+                    type: 'input-btn',
                     className: 'md:col-span-2',
                     props: {
                         label: 'Foreign Name',
+                        btnIcon:'icon-speech !text-2xl hover:!text-primary',
+                        btnClass:"!p-0 "
 
                     },
                     expressions: {
@@ -62,13 +67,19 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                 },
                 {
                     key: 'clientGroupId',
-                    type: 'multi-select',
+                    type: 'select',
                     className: 'md:col-span-2',
                     props: {
                         label: 'Client Group',
-                        optionsArr: THIS.lookupsData.clientGroup,
+                        optionsArr: [],
+                        selectedObj:{},
                         optionLabel: 'name',
                         optionValue: 'id',
+                        // endpoint:THIS._apiService.post(API_Config.client.getOrNewClientCode, null),
+                        onChange:()=>{
+                            THIS.getClientGroupOptions()
+                            THIS.setClientGroupValue()
+                        }
                     },
                     expressions: {
                         'props.readonly': 'formState.readonly',
@@ -80,7 +91,8 @@ export function clientsEditorMainInfoFormlyFieldsConfig(THIS: ClientsEditorMainI
                     className: 'md:col-span-2',
                     props: {
                         label: 'Introducing Lawyer',
-                        optionsArr: THIS.lookupsData.introducingLawyer,
+                        optionsArr: [],
+                        selectedObj:{},
                         optionLabel: 'name',
                         optionValue: 'id',
 

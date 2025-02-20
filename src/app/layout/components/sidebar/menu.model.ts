@@ -11,5 +11,6 @@ export interface SubMenuItem {
     route: string;
     expanded?: boolean;
     active?: boolean;
+    queryParams?:any;
     children?: Array<SubMenuItem>;
 }

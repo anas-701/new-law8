@@ -1,7 +1,7 @@
 
 @if(props.readonly){
     <div>
-        <img [src]="uploadedImage||'assets/images/user-avatar.svg'" alt="" class="size-32 rounded-full object-cover">
+        <img [src]="formControl.value||'assets/images/user-avatar.svg'" alt="" class="size-32 rounded-full object-cover">
     </div>
 
 }@else{

@@ -30,8 +30,8 @@ export abstract class FormBaseClass {
   _toastrNotifiService = inject(ToastrNotifiService)
   _languageService = inject(LanguageService);
   _dialogService = inject(DialogService);
-  // _dynamicDialogConfig = inject(DynamicDialogConfig);
-  // _dynamicDialogRef = inject(DynamicDialogRef);
+  _dynamicDialogConfig = inject(DynamicDialogConfig);
+  _dynamicDialogRef = inject(DynamicDialogRef);
   _storageService = inject(StorageService);
   _route = inject(ActivatedRoute);
   _router = inject(Router);

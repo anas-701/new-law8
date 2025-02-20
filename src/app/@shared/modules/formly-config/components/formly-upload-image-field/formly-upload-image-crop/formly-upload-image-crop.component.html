@@ -11,14 +11,18 @@
 ></image-cropper>
 <!-- شريط التمرير -->
 <div class="slider-container border-8 border-textSecondaryHover rounded-full">
-    <input
+    <!-- <input
       type="range"
       min="1"
       max="3"
       step="0.1"
       [(ngModel)]="scale"
+      class="w-full"
       (input)="onScaleChange()"
-    />
+    /> --> 
+    <p-slider [(ngModel)]="scale" styleClass="w-full" (ngModelChange)="onScaleChange()"  [min]="1"
+    [max]="3"
+    [step]="0.1"/>
 </div>
 
 <div class="flex justify-end gap-4 mt-4">

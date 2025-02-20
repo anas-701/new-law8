@@ -3,7 +3,7 @@ import { AuthGuard } from '../@core/guards/auth.guard';
 
 export const PAGES_ROUTES: Routes = [
     {
-        path: '',	
+        path: 'dashboard',	
         loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent)
     },
     {
@@ -13,8 +13,13 @@ export const PAGES_ROUTES: Routes = [
         canActivate:[AuthGuard]
     },
     {
-        path: '',
-        redirectTo: 'clients',
-        pathMatch: 'full'
-    }
+        path: 'clients/inactive',	
+        loadComponent: () => import('./clients/clients.component').then(m => m.ClientsComponent),
+        loadChildren: () => import('./clients/clients.routes').then(m => m.clientsRoutes)
+    },
+    {
+        path: 'matters',	
+        loadComponent: () => import('./matters/matters.component').then(m => m.MattersComponent),
+        loadChildren: () => import('./matters/matters.route').then(m => m.mattersRoutes)
+    },
 ];

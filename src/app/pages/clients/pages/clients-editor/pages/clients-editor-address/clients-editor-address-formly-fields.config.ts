@@ -1,5 +1,7 @@
-import { ClientsEditorAddressComponent } from './clients-editor-address.component';
-export function clientsEditorAddressFormlyFieldsConfig(THIS:ClientsEditorAddressComponent){
+import { FormlyFieldConfig } from "@ngx-formly/core";
+import { ClientsEditorAddressComponent } from "./clients-editor-address.component";
+
+export function clientsEditorAddressFormlyFieldsConfig(THIS: ClientsEditorAddressComponent): FormlyFieldConfig[] {  
   return [
     {
         fieldGroupClassName: 'grid grid-cols-6 gap-4',
@@ -17,7 +19,7 @@ export function clientsEditorAddressFormlyFieldsConfig(THIS:ClientsEditorAddress
             },
           },
           {
-            key: 'zIpCode',
+            key: 'zipCode',
             type: 'input',
             className: 'md:col-span-2',
             props: {
@@ -29,14 +31,12 @@ export function clientsEditorAddressFormlyFieldsConfig(THIS:ClientsEditorAddress
             },
           },
           {
-            key: 'countryId',
+            key: 'country',
             type: 'select',
             className: 'md:col-span-2',
             props: {
               label: 'Country',
-              optionsArr: THIS.lookupsData.country,
-              optionLabel: 'name',
-              optionValue: 'id',
+              optionsArr: []
   
             },
             expressions: {

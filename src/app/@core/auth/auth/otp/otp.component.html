@@ -8,4 +8,4 @@
   <p class="px-8 py-3.5 font-bold text-center text-primary font-sfProDisplay text-lg" >{{counterInSeconds|secondsToTime}}</p>
 }
 
-<app-shared-button  [label]="'auth.sendCodeAgain'|translate" [styleClass]="'text-primary disabled:text-greyScale300'" (onClick)="countDown()" [disabled]="isLoading"/>
+<app-shared-button  [label]="'auth.sendCodeAgain'|translate" [styleClass]="'text-primary disabled:text-greyScale300'" (onClick)="resendOtp()" [disabled]="isLoading"/>

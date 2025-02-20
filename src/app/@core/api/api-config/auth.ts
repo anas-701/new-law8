@@ -5,7 +5,9 @@ export const Auth_API = {
       "forgetPasswordSendOtp":"Auth/SendOtp",
       "forgetPassword":"Auth/ForgetPassword",
       "forgetPasswordValidateOtp":"Auth/ValidateOtp",
-      "changePassword":"Auth/ChangePassword"
+      "changePassword":"Auth/ChangePassword",
+      "resendByUserName":"Auth/ResendSendOtpByUserName",
+      "resendByEmail":"Auth/ResendSendOtpByEmail",
   }
 
 }

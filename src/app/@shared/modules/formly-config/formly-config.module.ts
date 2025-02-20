@@ -28,6 +28,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormlyPhoneFieldComponent } from './components/formly-phone-field/formly-phone-field.component';
 import { NgxIntlTelInputModule } from '@justin-s/ngx-intl-tel-input';
 import { FormlyUploadImageFieldComponent } from './components/formly-upload-image-field/formly-upload-image-field.component';
+import { FormlyInputBtnFieldComponent } from './components/formly-input-btn-field/formly-input-btn-field.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FormlyUploadImageFieldComponent } from './components/formly-upload-imag
     FormlySelectFieldComponent,
     FormlyMultiSelectFieldComponent,
     FormlyPhoneFieldComponent,
-    FormlyUploadImageFieldComponent
+    FormlyUploadImageFieldComponent,
+    FormlyInputBtnFieldComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,7 @@ import { FormlyUploadImageFieldComponent } from './components/formly-upload-imag
         { name: 'phone', component: FormlyPhoneFieldComponent, extends: 'input' },
         { name: 'multi-select', component: FormlyMultiSelectFieldComponent, extends: 'input' },
         { name: 'upload-image', component: FormlyUploadImageFieldComponent, extends: 'input' },
+        { name: 'input-btn', component: FormlyInputBtnFieldComponent, extends: 'input' },
       ]
     }),
     FormlyPrimeNGModule,

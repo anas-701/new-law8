@@ -1,10 +1,11 @@
 export const Clients_API = {
   client: {
-    get: 'Client/GetList',
-    getById: 'Client/GetById',
-    create: 'Client/Create',
-    update: 'Client/Update',
-    getOrNewClientCode:"Client/GetClientCodeorNewClient",
-    createIntake: '/CreateClientIntake',
+    get:'ClientV2/GetActiveList', //'Client/GetList',
+    getById: 'ClientV2/GetById',
+    create: 'ClientV2/Create',
+    update: 'ClientV2/Update',
+    getOrNewClientCode:"ClientV2/GetClientCodeorNewClient",
+    // createIntake: '/CreateClientIntake',
+    activationClient:'ClientV2/Activation'
   }
 };

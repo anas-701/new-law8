@@ -9,11 +9,17 @@ import { ToggleFormService } from 'src/app/@shared/modules/formly-config/service
 import { FormlyConfigModule } from 'src/app/@shared/modules/formly-config/formly-config.module';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormlyFormOptions } from '@ngx-formly/core';
-import { combineLatest, finalize } from 'rxjs';
-import { ApiService } from 'src/app/@core/api/api.service';
+import { finalize } from 'rxjs';
 import { API_Config } from 'src/app/@core/api/api-config/api.config';
-import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
 import { ApiRes } from 'src/app/@core/models/apiRes-model';
+import { UnsubscribeService } from 'src/app/@shared/services/unsubscribe/unsubscribe.service';
+import { ApiService } from 'src/app/@core/api/api.service';
+import { ToastrNotifiService } from 'src/app/@core/services';
+import { objectToFormData } from 'src/app/@core/utilities/functions/objectToFormData';
+import { ClientService } from '../../services/client.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { SharedConfirmDialogComponent } from 'src/app/@shared/components/shared-confirm-dialog/shared-confirm-dialog.component';
+import { ConfirmDialogType } from 'src/app/@shared/enums/confirm-dialog-type';
 
 @Component({
   selector: 'app-clients-editor',
@@ -35,17 +41,18 @@ export class ClientsEditorComponent implements OnInit {
   _toggleFormService = inject(ToggleFormService);
   _router = inject(Router);
   _route = inject(ActivatedRoute);
-  _apiService = inject(ApiService);
   _unsubscribe = inject(UnsubscribeService);
+  _apiService = inject(ApiService);
+  _toastrNotifiService = inject(ToastrNotifiService);
+  _dialogService = inject(DialogService);
+  _clientService = inject(ClientService)
   isLoading!: boolean;
-  lookupsData: any = {};
   formlyModel: any;
-  clientIdentifier!: string;
   formlyOptions: FormlyFormOptions = {};
   formly: FormGroup = new FormGroup({});
+  clientIdentifier: any;
   toggleEditEffect = effect(() => {
-    if (!this._router.url.includes('add')) {
-      console.log(this._toggleFormService.getToggleEdit())
+    if (this._router.url.includes('view')) {
       this.formlyOptions.formState.readonly = this._toggleFormService.getToggleEdit();
     }
   })
@@ -53,89 +60,103 @@ export class ClientsEditorComponent implements OnInit {
     if (!this._router.url.includes('add')) {
       this.getParams()
     }
-    
   }
-
   getParams() {
-    this._route.params.pipe(this._unsubscribe.takeUntilDestroy()).subscribe({
-      next: (res: Params) => {
-        this.clientIdentifier = res['id'];
-        this.setFormData()
-      }
+    this._route.params.pipe(
+      this._unsubscribe.takeUntilDestroy()
+    ).subscribe((params: Params) => {
+      this.clientIdentifier = params['id'] || 1;
+      this.setFormData();
     })
   }
 
   setFormData() {
-    this._apiService.get(API_Config.client.getById,{id:this.clientIdentifier}).pipe(
-      finalize(()=>this.isLoading=false),
+    this._apiService.get(API_Config.client.getById, { id: this.clientIdentifier }).pipe(
+      finalize(() => this.isLoading = false),
       this._unsubscribe.takeUntilDestroy()
     ).subscribe({
-      next:(res:ApiRes)=>{
-        this.formlyModel=res.result;
+      next: (res: ApiRes) => {
+        if (res.isSuccess) {
+          this.formlyModel = res.result;
+          this._clientService.client$.next(this.formlyModel)
+          // this.formlyModel.image=res.result?.imagePath?environment.baseUrl+res.result?.imagePath:null;
+          // this.formlyModel={...this.formlyModel}
+        }
       }
-    })  
-    // setTimeout(() => {
-    //   this.formlyModel = {
-    //     clientCode: 'C12345',
-    //     clientName: 'John Doe',
-    //     foreignName: 'جون دو',
-    //     clientGroup: ['Group 1', 'Group 2'],
-    //     introducingLawyer: 'Lawyer 2',
-    //     address1: '123 Main St',
-    //     address2: 'Apt 4B',
-    //     country: 'Country 1',
-    //     zipCode: '12345',
-    //     city: 'New York',
-    //     state: 'NY',
-    //     mobile1: '97129992',
-    //     mobile2: '97129992',
-    //     phone1: '97129992',
-    //     phone2: '97129992',
-    //     email1: 'johndoe@example.com',
-    //     email2: 'johndoe@example.com'
-    //   };
-    // }, 200);
+    })
   }
-
 
   onSubmit() {
     if (this.formly.invalid) {
       this.formly.markAllAsTouched();
-      return;
-    }
+      return
+    };
     this.isLoading = true;
-    this.formlyModel = {
-      ...this.formlyModel,
-      // clientContacts: this.contact,
-      phone1: this.formly.value.phone1?.internationalNumber,
-      phone2: this.formly.value.phone2?.internationalNumber,
-      mobile1: this.formly.value.mobile1?.internationalNumber
-        ? this.formly.value.mobile1?.internationalNumber
+    let payload = {
+      ...this.formly.value,
+      phone1: this.formly.value?.phone1?.internationalNumber,
+      phone2: this.formly.value?.phone2?.internationalNumber,
+      mobile1: this.formly.value?.mobile1?.internationalNumber
+        ? this.formly.value?.mobile1?.internationalNumber
         : this.formly.value.mobile1,
-      mobile2: this.formly.value.mobile2?.internationalNumber
-        ? this.formly.value.internationalNumber
+      mobile2: this.formly.value?.mobile2?.internationalNumber
+        ? this.formly.value?.mobile2?.internationalNumber
         : this.formly.value.mobile2,
     };
+    const body = this.clientIdentifier ? { ...payload, id: this.clientIdentifier } : payload
     const path = this.clientIdentifier
       ? API_Config.client.update
       : API_Config.client.create;
 
-    // console.log(this.formlyModel);
     this._apiService
-      .post(path, this.formlyModel)
+      .post(path, objectToFormData(body))
       .pipe(
         finalize(() => (this.isLoading = false)),
         this._unsubscribe.takeUntilDestroy()
       )
       .subscribe({
         next: (res: ApiRes) => {
-          // console.log('isSuccess',res.isSuccess)
           if (res.isSuccess) {
 
+            if (!this.clientIdentifier) {
+              this.onSuccess(res.result)
+            }
+            this._toastrNotifiService.displaySuccess(res.message)
           }
         },
       });
     this._toggleFormService.updateToggleEdit(true)
-    console.log(this.formly.value);
+  }
+  onSuccess(client: any) {
+    const ref = this._dialogService.open(SharedConfirmDialogComponent, {
+      data: {
+        type: ConfirmDialogType.Success,
+        title: 'Client Added Successfully',
+        message: 'Here some Action you can do next',
+        btns: [
+          {
+            label: 'Close',
+            styleClass: 'border border-grey500 text-grey500 !py-2.5 font-medium text-lg',
+            command: () => {
+              ref.close()
+            }
+          },
+          {
+            label: 'Add Contact',
+            styleClass: 'border border-primary text-primary !py-2.5 font-medium text-lg',
+            command: () => {
+              this._router.navigate([`/clients/view/${client.id}/contacts`])
+            }
+          },
+          {
+            label: 'Add Matter',
+            styleClass: 'bg-primary text-white !py-2.5 font-medium text-lg',
+            command: () => {
+              this._router.navigate([`/clients/view/${client.id}/matters`])
+            }
+          },
+        ]
+      }
+    })
   }
 }

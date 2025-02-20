@@ -18,7 +18,7 @@ export const AppHttpInterceptor: HttpInterceptorFn = (
   const _storageService = inject(StorageService);
   const _languageService = inject(LanguageService);
 
-  const token = _storageService.getStorage(USER)?.token;
+  const token = _storageService.getStorage('token');
 
 
   let headersToAppend: any = {};
