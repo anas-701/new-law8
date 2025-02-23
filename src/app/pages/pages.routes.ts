@@ -22,4 +22,9 @@ export const PAGES_ROUTES: Routes = [
         loadComponent: () => import('./matters/matters.component').then(m => m.MattersComponent),
         loadChildren: () => import('./matters/matters.route').then(m => m.mattersRoutes)
     },
+    {
+        path:'matters/:id',
+        loadComponent:()=>import('./matters/pages/matter-details/matter-details.component').then(comp=>comp.MatterDetailsComponent),
+        loadChildren:()=>import('./matters/pages/matter-details/matter-details.routes').then(mod=>mod.Matter_Details_Routes)
+    }
 ];

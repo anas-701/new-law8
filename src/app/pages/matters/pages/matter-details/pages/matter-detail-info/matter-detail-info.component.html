@@ -120,21 +120,20 @@
         <app-shared-button [icon]="'icon-add-circle text-primary !text-2xl '" [label]="'Add New Address' | translate"
         [styleClass]="
           'flex text-blue600 font-sfProDisplay !text-sm !py-1 !px-0 !font-medium !leading-8'
-        " />
+        " (onClick)="openAddressEditor()"/>
     </div>
     
     <p-table [value]="data.addresses" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="body" let-address>
             <tr class="bg-grey50 mb-2 rounded-xl border border-grey100">
                 <td class="font-medium text-sm text-textSecondary border-y border-s border-grey100 rounded-s-lg">{{ address.line1 }}</td>
-                <td class="font-medium text-sm text-textSecondary border-y border-grey100">{{ address.line2 }}</td>
                 <td class="font-medium text-sm text-textSecondary border-y border-grey100">{{ address.streetNumber }}</td>
                 <td class="font-medium text-sm text-textSecondary border-y border-grey100">{{ address.city }}</td>
                 <td class="font-medium text-sm text-textSecondary border-y border-grey100">{{ address.country }}</td>
                 <td class="font-medium text-sm text-textSecondary border-y border-grey100">{{ address.state }}</td>
                 <td class="font-medium text-sm text-textSecondary border-y border-grey100">{{ address.zipCode }}</td>
                 <td class="font-medium text-sm text-textSecondary border-y  border-e border-grey100 rounded-e-lg flex gap-6 w-16">
-                    <div class="cursor-pointer">
+                    <div class="cursor-pointer" (click)="openAddressEditor(address)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="stroke-grey500 stroke-2">
                             <path
                                 d="M11 2.00012H9C4 2.00012 2 4.00012 2 9.00012V15.0001C2 20.0001 4 22.0001 9 22.0001H15C20 22.0001 22 20.0001 22 15.0001V13.0001"

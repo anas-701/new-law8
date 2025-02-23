@@ -75,7 +75,7 @@ export class MatterDetailsComponent implements OnInit{
       { label: this.data.title },
     ];
     this.activeItem=this.tabs.find(obj=>this._router.url.includes(obj?.label?.toLocaleLowerCase()||''))||this.tabs[0];
-    
+    console.log('check',this.tabs.find(obj=>this._router.url.includes(obj?.label?.toLocaleLowerCase()||'')))
   }
  
 }
