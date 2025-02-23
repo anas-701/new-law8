@@ -48,10 +48,9 @@ export class MattersListComponent implements OnInit,OnDestroy{
     
   }
   onFilter(e:any){
-    
     this.pagination={
       ...this.pagination,
-      clientId:e.clientId.id
+      clientId:e?.clientId?.id
     }
     console.log('this.pagination',this.pagination)
     if(this._router.url.includes('favourite')){

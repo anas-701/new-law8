@@ -5,6 +5,8 @@ export const matter = {
     title: 'Al-Massa matter name',
     code: '000123-01',
     law_AppStatus: MatterStatus.NewCase,
+    stage:'First Instance',
+    descr:"This an example of notes written here in fill width screen with max limit as defined before",
     law_Client: "00018  |  Mohamed ahmed Saad",
     openDate: new Date(),
     closeDate: new Date(),

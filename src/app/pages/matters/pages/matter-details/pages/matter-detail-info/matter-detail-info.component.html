@@ -5,7 +5,11 @@
         <div class="grow grid gap-6 grid-cols-3">
             <div class="col-span-3">
                 <span class="text-primary font-bold text-sm me-3">{{data.code}}</span>
+                <span class="text-xs me-3">{{data.stage}}</span>
                 <app-shared-status [data]="data.law_AppStatus" [statusConfig]="statusConfig" />
+            </div>
+            <div class="col-span-3">
+                <p class="font-bold text-textSecondary text-sm">{{data.descr}}</p>
             </div>
             <div class="col-span-3">
                 <p class="text-sm text-grey500 mb-3.5">{{'Client'|translate}}</p>
