@@ -63,7 +63,8 @@
     </ng-template>
 </p-table>
 @if (withPagination) {
-<p-paginator styleClass="py-6" (onPageChange)="pageChanged($event)" [rows]="pagination?.pagSize"
+    
+<p-paginator [dir]="'ltr'" styleClass="py-6" (onPageChange)="pageChanged($event)" [rows]="pagination?.pagSize"
     [totalRecords]="pagination?.totalElements" [rowsPerPageOptions]="PAGE_SIZE_OPTION" [showCurrentPageReport]="true"
     [currentPageReportTemplate]="currentPageReportTemplate" [first]="first" dropdownAppendTo="body"
     [pageLinkSize]="5" />

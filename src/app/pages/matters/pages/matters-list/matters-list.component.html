@@ -11,7 +11,7 @@
                     <p class="text-sm text-textSecondary font-medium truncate w-80" [pTooltip]="rowData.descr"
                         tooltipPosition="top">{{rowData.descr}}</p>
                     <span class="text-xs text-primary font-medium me-4">{{rowData.mtrNo}}</span>
-                    <app-shared-status [data]="rowData.law_AppStatus" [statusConfig]="statusConfig" />
+                    <app-shared-status [label]="rowData.law_AppStatus" [data]="rowData.law_AppStatusId"  [statusConfig]="statusConfig" />
                 </div>
             </div>
         </ng-template>
